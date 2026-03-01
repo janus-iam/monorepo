@@ -10,7 +10,7 @@
   "hero": {
     "kicker": "Managed Identity & Access",
     "title": "One identity. Everywhere.",
-    "subtitle": "Centralized IAM across the internet. Neutral provider. MFA, monitoring, SOC2, GDPR. High availability, multi-region backups.",
+    "subtitle": "Centralized IAM across the internet. Neutral provider. MFA, monitoring, SOC2, GDPR. High availability, multi-cloud & multi-region backups.",
     "ctaPrimary": "Get started",
     "ctaSecondary": "See pricing",
     "stat": "Multi-cloud · Multi-region"
