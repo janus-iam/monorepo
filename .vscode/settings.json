@@ -9,9 +9,9 @@
     "**/routeTree.gen.ts": true
   },
   "files.exclude": {
-    "node_modules": true,
-    "dist": true,
-    ".tanstack": true,
-    ".turbo": true
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.tanstack": true,
+    "**/.turbo": true
   }
 }
