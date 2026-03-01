@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About",
+    "pricing": "Pricing",
+    "docs": "Docs",
+    "demo": "Demo"
+  },
+  "hero": {
+    "kicker": "Managed Identity & Access",
+    "title": "One identity. Everywhere.",
+    "subtitle": "Centralized IAM across the internet. Neutral provider. MFA, monitoring, SOC2, GDPR. High availability, multi-region backups.",
+    "ctaPrimary": "Get started",
+    "ctaSecondary": "See pricing",
+    "stat": "Multi-cloud · Multi-region"
+  },
+  "sections": {
+    "data": {
+      "title": "What we keep. Where it lives. Who has access.",
+      "whatWeKeep": "What we keep",
+      "whatWeKeepList": ["Identity (email, profile you choose)", "Authentication logs (security only)", "Consent records"],
+      "whereStored": "Where it's stored",
+      "whereStoredList": ["PostgreSQL, multi-cloud & multi-region", "EU and US regions available", "Encrypted at rest and in transit"],
+      "whoHasAccess": "Who has access",
+      "whoHasAccessList": ["You: full access to your data", "Support: only when you request help", "No resale, no ad targeting"]
+    },
+    "auth": {
+      "title": "Authentication flow",
+      "subtitle": "Rare by design.",
+      "step1": "You click sign-in on a service",
+      "step2": "You consent once at Janus",
+      "step3": "Callback, session created",
+      "points": ["No tracking for ads", "Minimal data only", "You control revocation"]
+    },
+    "services": {
+      "title": "Connect to the services you use",
+      "categories": {
+        "development": "Development",
+        "productivity": "Productivity",
+        "communication": "Communication",
+        "other": "Other"
+      },
+      "list": {
+        "development": ["GitHub", "GitLab", "Bitbucket"],
+        "productivity": ["Notion", "Linear", "Figma"],
+        "communication": ["Slack", "Discord", "Zoom"],
+        "other": ["Google", "Microsoft"]
+      }
+    },
+    "community": {
+      "title": "Built with the community",
+      "subtitle": "These integrations need your help to exist.",
+      "cta": "Contribute on GitHub",
+      "items": ["OIDC/OAuth2 providers for more services", "Custom themes and plugins", "Documentation and translations"]
+    },
+    "totp": {
+      "title": "TOTP app recommendations",
+      "subtitle": "Use an authenticator app for 2FA. We are not affiliated with these apps.",
+      "android": "Android",
+      "ios": "iOS",
+      "playStore": "Google Play",
+      "fdroid": "F-Droid",
+      "appStore": "App Store",
+      "apps": {
+        "googleAuthenticator": "Google Authenticator",
+        "aegis": "Aegis Authenticator",
+        "microsoftAuthenticator": "Microsoft Authenticator",
+        "appleBuiltIn": "Built-in (Settings → Passwords)"
+      }
+    },
+    "pricing": {
+      "title": "Pricing",
+      "subtitle": "Free for individuals. Paid for teams and enterprises.",
+      "free": "Free",
+      "freeFor": "For individuals",
+      "freeFeatures": ["Sign in with Janus", "MFA", "Mange your app connections", "Unlimited connected apps"],
+      "paid": "Paid",
+      "paidFor": "For teams & enterprises",
+      "paidFeatures": ["Support & SLA"],
+      "cta": "Contact us"
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} Janus. All rights reserved.",
+    "builtWith": "Managed IAM"
+  },
+  "social": {
+    "github": "Janus on GitHub",
+    "x": "Follow us on X"
+  }
+}
