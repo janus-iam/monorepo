@@ -14,4 +14,6 @@ To recover a lost account; user will need personal questions of recoverry code. 
 
 [] In the dashboard, add a page where the user can see the metrics related to the user theyself, queried from prometheus
 
+[] Add user profile picture using keycloak custom attribute field. However, compare multiuple implementations for this before doing it
+
 [] Disable keycloak user account ui
