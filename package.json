@@ -35,7 +35,8 @@
     "db:down": "turbo -F @janus/db db:down",
     "check": "oxlint && oxfmt --write",
     "ruler:apply": "bunx @intellectronica/ruler@latest apply --local-only",
-    "lefthook:install": "lefthook install"
+    "lefthook:install": "lefthook install",
+    "lefthook:run": "lefthook run pre-commit"
   },
   "dependencies": {
     "@janus/env": "workspace:*",
