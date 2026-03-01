@@ -19,11 +19,23 @@
     "data": {
       "title": "What we keep. Where it lives. Who has access.",
       "whatWeKeep": "What we keep",
-      "whatWeKeepList": ["Identity (email, profile you choose)", "Authentication logs (security only)", "Consent records"],
+      "whatWeKeepList": [
+        "Identity (email, profile you choose)",
+        "Authentication logs (security only)",
+        "Consent records"
+      ],
       "whereStored": "Where it's stored",
-      "whereStoredList": ["PostgreSQL, multi-cloud & multi-region", "EU and US regions available", "Encrypted at rest and in transit"],
+      "whereStoredList": [
+        "PostgreSQL, multi-cloud & multi-region",
+        "EU and US regions available",
+        "Encrypted at rest and in transit"
+      ],
       "whoHasAccess": "Who has access",
-      "whoHasAccessList": ["You: full access to your data", "Support: only when you request help", "No resale, no ad targeting"]
+      "whoHasAccessList": [
+        "You: full access to your data",
+        "Support: only when you request help",
+        "No resale, no ad targeting"
+      ]
     },
     "auth": {
       "title": "Authentication flow",
@@ -52,7 +64,11 @@
       "title": "Built with the community",
       "subtitle": "These integrations need your help to exist.",
       "cta": "Contribute on GitHub",
-      "items": ["OIDC/OAuth2 providers for more services", "Custom themes and plugins", "Documentation and translations"]
+      "items": [
+        "OIDC/OAuth2 providers for more services",
+        "Custom themes and plugins",
+        "Documentation and translations"
+      ]
     },
     "totp": {
       "title": "TOTP app recommendations",
@@ -74,7 +90,12 @@
       "subtitle": "Free for individuals. Paid for teams and enterprises.",
       "free": "Free",
       "freeFor": "For individuals",
-      "freeFeatures": ["Sign in with Janus", "MFA", "Mange your app connections", "Unlimited connected apps"],
+      "freeFeatures": [
+        "Sign in with Janus",
+        "MFA",
+        "Mange your app connections",
+        "Unlimited connected apps"
+      ],
       "paid": "Paid",
       "paidFor": "For teams & enterprises",
       "paidFeatures": ["Support & SLA"],

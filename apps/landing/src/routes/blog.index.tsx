@@ -1,36 +1,33 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
-import { allBlogs } from 'content-collections'
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '#/lib/site'
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { allBlogs } from "content-collections";
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "#/lib/site";
 
-const canonical = `${SITE_URL}/blog`
-const pageTitle = `Blog | ${SITE_TITLE}`
+const canonical = `${SITE_URL}/blog`;
+const pageTitle = `Blog | ${SITE_TITLE}`;
 
-export const Route = createFileRoute('/blog/')({
+export const Route = createFileRoute("/blog/")({
   head: () => ({
-    links: [{ rel: 'canonical', href: canonical }],
+    links: [{ rel: "canonical", href: canonical }],
     meta: [
       { title: pageTitle },
-      { name: 'description', content: SITE_DESCRIPTION },
-      { property: 'og:image', content: `${SITE_URL}/images/lagoon-1.svg` },
+      { name: "description", content: SITE_DESCRIPTION },
+      { property: "og:image", content: `${SITE_URL}/images/lagoon-1.svg` },
     ],
   }),
   component: BlogIndex,
-})
+});
 
 function BlogIndex() {
   const postsByDate = Array.from(
     new Map(
       [...allBlogs]
-        .sort(
-          (a, b) =>
-            new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf(),
-        )
+        .sort((a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf())
         .map((post) => [post.slug, post]),
     ).values(),
-  )
+  );
 
-  const featured = postsByDate[0]
-  const posts = postsByDate.slice(1)
+  const featured = postsByDate[0];
+  const posts = postsByDate.slice(1);
   return (
     <main className="page-wrap px-4 pb-8 pt-14">
       <section className="mb-4">
@@ -50,17 +47,11 @@ function BlogIndex() {
             />
           ) : null}
           <h2 className="m-0 text-2xl font-semibold text-[var(--sea-ink)]">
-            <Link
-              to="/blog/$slug"
-              params={{ slug: featured.slug }}
-              className="no-underline"
-            >
+            <Link to="/blog/$slug" params={{ slug: featured.slug }} className="no-underline">
               {featured.title}
             </Link>
           </h2>
-          <p className="mb-2 mt-3 text-base text-[var(--sea-ink-soft)]">
-            {featured.description}
-          </p>
+          <p className="mb-2 mt-3 text-base text-[var(--sea-ink-soft)]">{featured.description}</p>
           <p className="m-0 text-xs text-[var(--sea-ink-soft)]">
             {new Date(featured.pubDate).toLocaleDateString()}
           </p>
@@ -80,17 +71,11 @@ function BlogIndex() {
               />
             ) : null}
             <h2 className="m-0 text-2xl font-semibold text-[var(--sea-ink)]">
-              <Link
-                to="/blog/$slug"
-                params={{ slug: post.slug }}
-                className="no-underline"
-              >
+              <Link to="/blog/$slug" params={{ slug: post.slug }} className="no-underline">
                 {post.title}
               </Link>
             </h2>
-            <p className="mb-2 mt-2 text-sm text-[var(--sea-ink-soft)]">
-              {post.description}
-            </p>
+            <p className="mb-2 mt-2 text-sm text-[var(--sea-ink-soft)]">{post.description}</p>
             <p className="m-0 text-xs text-[var(--sea-ink-soft)]">
               {new Date(post.pubDate).toLocaleDateString()}
             </p>
@@ -98,5 +83,5 @@ function BlogIndex() {
         ))}
       </section>
     </main>
-  )
+  );
 }

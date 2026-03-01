@@ -1,32 +1,49 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
 
 const ANDROID_APPS = [
-  { nameKey: 'sections.totp.apps.googleAuthenticator', playStore: 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2', fdroid: null },
-  { nameKey: 'sections.totp.apps.aegis', playStore: 'https://play.google.com/store/apps/details?id=com.beemdevelopment.aegis', fdroid: 'https://f-droid.org/en/packages/com.beemdevelopment.aegis/' },
-  { nameKey: 'sections.totp.apps.microsoftAuthenticator', playStore: 'https://play.google.com/store/apps/details?id=com.azure.authenticator', fdroid: null },
-] as const
+  {
+    nameKey: "sections.totp.apps.googleAuthenticator",
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2",
+    fdroid: null,
+  },
+  {
+    nameKey: "sections.totp.apps.aegis",
+    playStore: "https://play.google.com/store/apps/details?id=com.beemdevelopment.aegis",
+    fdroid: "https://f-droid.org/en/packages/com.beemdevelopment.aegis/",
+  },
+  {
+    nameKey: "sections.totp.apps.microsoftAuthenticator",
+    playStore: "https://play.google.com/store/apps/details?id=com.azure.authenticator",
+    fdroid: null,
+  },
+] as const;
 
 const IOS_APPS = [
-  { nameKey: 'sections.totp.apps.googleAuthenticator', appStore: 'https://apps.apple.com/app/google-authenticator/id388497605' },
-  { nameKey: 'sections.totp.apps.microsoftAuthenticator', appStore: 'https://apps.apple.com/app/microsoft-authenticator/id983156458' },
-  { nameKey: 'sections.totp.apps.appleBuiltIn', appStore: null },
-] as const
+  {
+    nameKey: "sections.totp.apps.googleAuthenticator",
+    appStore: "https://apps.apple.com/app/google-authenticator/id388497605",
+  },
+  {
+    nameKey: "sections.totp.apps.microsoftAuthenticator",
+    appStore: "https://apps.apple.com/app/microsoft-authenticator/id983156458",
+  },
+  { nameKey: "sections.totp.apps.appleBuiltIn", appStore: null },
+] as const;
 
 export function TotpApps() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <section className="island-shell rounded-2xl p-6 sm:p-8 lg:p-10">
       <h2 className="display-title mb-2 text-2xl font-bold text-[var(--sea-ink)] sm:text-3xl">
-        {t('sections.totp.title')}
+        {t("sections.totp.title")}
       </h2>
-      <p className="mb-8 text-sm text-[var(--sea-ink-soft)]">
-        {t('sections.totp.subtitle')}
-      </p>
+      <p className="mb-8 text-sm text-[var(--sea-ink-soft)]">{t("sections.totp.subtitle")}</p>
       <div className="grid gap-8 sm:grid-cols-2">
         <div>
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--kicker)]">
-            {t('sections.totp.android')}
+            {t("sections.totp.android")}
           </h3>
           <ul className="m-0 space-y-3">
             {ANDROID_APPS.map((app, i) => (
@@ -40,7 +57,7 @@ export function TotpApps() {
                       rel="noreferrer"
                       className="text-[var(--lagoon-deep)] underline"
                     >
-                      {t('sections.totp.playStore')}
+                      {t("sections.totp.playStore")}
                     </a>
                   )}
                   {app.fdroid && (
@@ -50,7 +67,7 @@ export function TotpApps() {
                       rel="noreferrer"
                       className="text-[var(--lagoon-deep)] underline"
                     >
-                      {t('sections.totp.fdroid')}
+                      {t("sections.totp.fdroid")}
                     </a>
                   )}
                 </span>
@@ -60,7 +77,7 @@ export function TotpApps() {
         </div>
         <div>
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--kicker)]">
-            {t('sections.totp.ios')}
+            {t("sections.totp.ios")}
           </h3>
           <ul className="m-0 space-y-3">
             {IOS_APPS.map((app, i) => (
@@ -74,7 +91,7 @@ export function TotpApps() {
                       rel="noreferrer"
                       className="text-[var(--lagoon-deep)] underline"
                     >
-                      {t('sections.totp.appStore')}
+                      {t("sections.totp.appStore")}
                     </a>
                   </span>
                 )}
@@ -84,5 +101,5 @@ export function TotpApps() {
         </div>
       </div>
     </section>
-  )
+  );
 }

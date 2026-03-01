@@ -1,7 +1,7 @@
 ---
-title: 'TOTP app recommendations'
-description: 'Recommended authenticator apps for 2FA on Android and iOS. We are not affiliated with these apps.'
-pubDate: '2025-03-01'
+title: "TOTP app recommendations"
+description: "Recommended authenticator apps for 2FA on Android and iOS. We are not affiliated with these apps."
+pubDate: "2025-03-01"
 ---
 
 Use an authenticator app for two-factor authentication (2FA) with Janus. We are not affiliated with any of the apps listed below.

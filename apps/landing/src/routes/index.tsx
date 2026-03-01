@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Hero,
   DataPrivacy,
@@ -7,9 +7,9 @@ import {
   Community,
   Pricing,
   SectionReveal,
-} from '#/components/landing'
+} from "#/components/landing";
 
-export const Route = createFileRoute('/')({ component: HomePage })
+export const Route = createFileRoute("/")({ component: HomePage });
 
 function HomePage() {
   return (
@@ -35,5 +35,5 @@ function HomePage() {
         </SectionReveal>
       </div>
     </main>
-  )
+  );
 }

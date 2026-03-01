@@ -1,8 +1,8 @@
 ---
-title: 'Neon Mango Protocol'
-description: 'A quick walkthrough of the starter foundations.'
-pubDate: 'Jul 08 2024'
-heroImage: '/images/lagoon-3.svg'
+title: "Neon Mango Protocol"
+description: "A quick walkthrough of the starter foundations."
+pubDate: "Jul 08 2024"
+heroImage: "/images/lagoon-3.svg"
 ---
 
 This starter ships with routes, SSR, and a calm visual system out of the box.
