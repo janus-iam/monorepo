@@ -1,0 +1,24 @@
+{
+  "name": "@janus/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@janus/db": "workspace:*",
+    "@janus/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@janus/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}

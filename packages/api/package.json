@@ -1,0 +1,27 @@
+{
+  "name": "@janus/api",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@janus/auth": "workspace:*",
+    "@janus/db": "workspace:*",
+    "@janus/env": "workspace:*",
+    "@trpc/client": "catalog:",
+    "@trpc/server": "catalog:",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@janus/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}

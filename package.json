@@ -1,0 +1,52 @@
+{
+  "name": "janus",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "dotenv": "^17.2.2",
+      "zod": "^4.1.13",
+      "typescript": "^5",
+      "@types/bun": "^1.3.4",
+      "@trpc/server": "^11.7.2",
+      "better-auth": "^1.4.18",
+      "@trpc/client": "^11.7.2"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:native": "turbo -F native dev",
+    "dev:web": "turbo -F web dev",
+    "dev:server": "turbo -F server dev",
+    "db:push": "turbo -F @janus/db db:push",
+    "db:studio": "turbo -F @janus/db db:studio",
+    "db:generate": "turbo -F @janus/db db:generate",
+    "db:migrate": "turbo -F @janus/db db:migrate",
+    "db:start": "turbo -F @janus/db db:start",
+    "db:watch": "turbo -F @janus/db db:watch",
+    "db:stop": "turbo -F @janus/db db:stop",
+    "db:down": "turbo -F @janus/db db:down",
+    "check": "oxlint && oxfmt --write",
+    "ruler:apply": "bunx @intellectronica/ruler@latest apply --local-only"
+  },
+  "dependencies": {
+    "@janus/env": "workspace:*",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@janus/config": "workspace:*",
+    "@types/bun": "catalog:",
+    "oxfmt": "^0.26.0",
+    "oxlint": "^1.41.0",
+    "turbo": "^2.6.3",
+    "typescript": "catalog:"
+  },
+  "packageManager": "bun@1.3.10"
+}

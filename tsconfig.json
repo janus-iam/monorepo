@@ -1,0 +1,3 @@
+{
+  "extends": "@janus/config/tsconfig.base.json"
+}
