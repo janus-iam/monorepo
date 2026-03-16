@@ -91,9 +91,7 @@
         "recognition": [
           "Become a recognized identity provider like GitHub, Google, and Facebook on the web."
         ],
-        "finances": [
-          "Get funded through user generosity and donations."
-        ],
+        "finances": ["Get funded through user generosity and donations."],
         "infrastructure": [
           "Achieve robust multi-region, multi-cloud replication, backup, and disaster recovery with appropriate RPO and RTO targets."
         ]
@@ -103,10 +101,7 @@
       "title": "Built for the community",
       "subtitle": "These integrations use Janus to provide a better experience for users.",
       "cta": "Tell us about your integration",
-      "items": [
-        "Coinche",
-        "Poky"
-      ]
+      "items": ["Coinche", "Poky"]
     },
     "totp": {
       "title": "TOTP app recommendations",
