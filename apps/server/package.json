@@ -16,7 +16,6 @@
     "@janus/auth": "workspace:*",
     "@janus/db": "workspace:*",
     "@janus/env": "workspace:*",
-    "@keycloak/keycloak-admin-client": "^26.5.4",
     "@trpc/server": "catalog:",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
