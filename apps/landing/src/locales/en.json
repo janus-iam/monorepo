@@ -101,7 +101,10 @@
       "title": "Built for the community",
       "subtitle": "These integrations use Janus to provide a better experience for users.",
       "cta": "Tell us about your integration",
-      "items": ["Coinche", "Poky"]
+      "items": ["Coinche", "Poky"],
+      "devTitle": "For developers",
+      "devSubtitle": "Learn how to integrate Janus identity into your app.",
+      "devCta": "Read the docs"
     },
     "totp": {
       "title": "TOTP app recommendations",

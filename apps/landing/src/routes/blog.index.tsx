@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { allBlogs } from "content-collections";
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "#/lib/site";
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/site";
 
 const canonical = `${SITE_URL}/blog`;
 const pageTitle = `Blog | ${SITE_TITLE}`;
