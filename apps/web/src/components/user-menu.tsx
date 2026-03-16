@@ -8,11 +8,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@janus/ui/components/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
 
-import { Button } from "./ui/button";
-import { Skeleton } from "./ui/skeleton";
+import { Button } from "@janus/ui/components/button";
+import { Skeleton } from "@janus/ui/components/skeleton";
 
 export default function UserMenu() {
   const navigate = useNavigate();

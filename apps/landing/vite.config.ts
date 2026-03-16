@@ -13,9 +13,9 @@ const config = defineConfig({
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     viteReact(),
   ],
-  resolve : {
+  resolve: {
     tsconfigPaths: true,
-  }
+  },
 });
 
 export default config;

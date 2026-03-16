@@ -8,7 +8,7 @@ import type { trpc } from "@/utils/trpc";
 
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@janus/ui/components/sonner";
 
 import "../index.css";
 

@@ -6,9 +6,9 @@ import z from "zod";
 import { authClient } from "@/lib/auth-client";
 
 import Loader from "./loader";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { Button } from "@janus/ui/components/button";
+import { Input } from "@janus/ui/components/input";
+import { Label } from "@janus/ui/components/label";
 
 export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () => void }) {
   const navigate = useNavigate({

@@ -5,18 +5,18 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "../../packages/ui/src/styles/web.css",
+    "css": "src/styles/globals.css",
     "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
   },
   "iconLibrary": "lucide",
   "aliases": {
-    "components": "@/components",
+    "components": "@janus/ui/components",
     "utils": "@janus/ui/lib/utils",
-    "ui": "@janus/ui/components",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
+    "hooks": "@janus/ui/hooks",
+    "lib": "@janus/ui/lib",
+    "ui": "@janus/ui/components"
   },
   "menuColor": "default",
   "menuAccent": "subtle",
