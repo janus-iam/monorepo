@@ -16,7 +16,7 @@ export function Community() {
         ))}
       </ul>
       <a
-        href="https://github.com/janus-iam/janus"
+        href="https://github.com/janus-iam"
         target="_blank"
         rel="noreferrer"
         className="inline-flex items-center rounded-full border border-[var(--line)] bg-[var(--sea-ink)] px-5 py-2.5 text-sm font-semibold text-[var(--sand)] no-underline transition hover:-translate-y-0.5 hover:opacity-90"

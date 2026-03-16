@@ -22,7 +22,7 @@ export function Hero() {
         <div className="flex flex-wrap gap-3">
           <Link
             to="/"
-            className="rounded-full border border-[var(--line)] bg-[var(--sea-ink)] px-5 py-2.5 text-sm font-semibold text-[var(--sand)] no-underline transition hover:-translate-y-0.5 hover:opacity-90"
+            className="rounded-full border border-[var(--sea-ink)] bg-[var(--sea-ink)] px-5 py-2.5 text-sm font-semibold text-[var(--sand)] no-underline transition hover:-translate-y-0.5 hover:border-[var(--lagoon)] hover:bg-[var(--lagoon)]"
           >
             {t("hero.ctaPrimary")}
           </Link>

@@ -4,10 +4,11 @@ import {
   DataPrivacy,
   AuthFlow,
   Services,
+  Vision,
   Community,
   Pricing,
   SectionReveal,
-} from "#/components/landing";
+} from "@/components/landing";
 
 export const Route = createFileRoute("/")({ component: HomePage });
 
@@ -24,10 +25,15 @@ function HomePage() {
         <SectionReveal delay={50}>
           <AuthFlow />
         </SectionReveal>
-        <SectionReveal delay={100}>
+        {/*
+        <SectionReveal delay={75}>
           <Services />
         </SectionReveal>
-        <SectionReveal delay={50}>
+        */}
+        <SectionReveal delay={100}>
+          <Vision />
+        </SectionReveal>
+        <SectionReveal delay={75}>
           <Community />
         </SectionReveal>
         <SectionReveal delay={50}>

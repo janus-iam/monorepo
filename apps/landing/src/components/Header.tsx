@@ -31,15 +31,15 @@ export default function Header() {
           <Link to="/" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
             {t("nav.home")}
           </Link>
+          <a href="/#pricing" className="nav-link">
+            {t("nav.pricing")}
+          </a>
           <Link to="/blog" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
             {t("nav.blog")}
           </Link>
           <Link to="/about" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
             {t("nav.about")}
           </Link>
-          <a href="#pricing" className="nav-link">
-            {t("nav.pricing")}
-          </a>
           <a href="https://docs.janus.dev" className="nav-link" target="_blank" rel="noreferrer">
             {t("nav.docs")}
           </a>

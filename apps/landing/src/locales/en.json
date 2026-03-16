@@ -10,7 +10,7 @@
   "hero": {
     "kicker": "Managed Identity & Access",
     "title": "One identity. Everywhere.",
-    "subtitle": "Centralized IAM across the internet. Neutral provider. MFA, monitoring, SOC2, GDPR. High availability, multi-cloud & multi-region backups.",
+    "subtitle": "Centralized IAM for the open web. Neutral identity provider with MFA, monitoring, and strong privacy guarantees, designed for SOC 2 and GDPR-grade resilience across multi-cloud, multi-region infrastructure.",
     "ctaPrimary": "Get started",
     "ctaSecondary": "See pricing",
     "stat": "Multi-cloud · Multi-region"
@@ -27,7 +27,6 @@
       "whereStored": "Where it's stored",
       "whereStoredList": [
         "PostgreSQL, multi-cloud & multi-region",
-        "EU and US regions available",
         "Encrypted at rest and in transit"
       ],
       "whoHasAccess": "Who has access",
@@ -60,14 +59,53 @@
         "other": ["Google", "Microsoft"]
       }
     },
+    "vision": {
+      "title": "What we hope to achieve",
+      "subtitle": "The long-term goals for Janus as a neutral, citizen-friendly identity provider.",
+      "categories": {
+        "security": "Security & compliance",
+        "features": "User & product features",
+        "developers": "For developers",
+        "recognition": "Recognition & ecosystem",
+        "finances": "Funding & sustainability",
+        "infrastructure": "Infrastructure & resilience"
+      },
+      "goals": {
+        "security": [
+          "Enforce user security with MFA.",
+          "Apply GeoIP to detect abnormal new connections.",
+          "Provide disk encryption for databases.",
+          "Get audited for GDPR, SOC 2 Type II, ISO 27001, NIS 2, HDS, and SecNumCloud 3.2."
+        ],
+        "features": [
+          "Use your FranceConnect account as a gateway for other apps.",
+          "Offer address, identity and student status verification.",
+          "Offer a portal for users to see where their identity is being used and which app uses which data.",
+          "Send emails when new connections are created.",
+          "Offer a subscription package and make it purchasable through works council benefits.",
+          "Package the subscription with out-of-the-box applications to replace GAFAM tools (for example, a Drive alternative, Google Photos)."
+        ],
+        "developers": [
+          "Allow developers to create new apps with public credentials to use Janus through OIDC."
+        ],
+        "recognition": [
+          "Become a recognized identity provider like GitHub, Google, and Facebook on the web."
+        ],
+        "finances": [
+          "Get funded through user generosity and donations."
+        ],
+        "infrastructure": [
+          "Achieve robust multi-region, multi-cloud replication, backup, and disaster recovery with appropriate RPO and RTO targets."
+        ]
+      }
+    },
     "community": {
-      "title": "Built with the community",
-      "subtitle": "These integrations need your help to exist.",
-      "cta": "Contribute on GitHub",
+      "title": "Built for the community",
+      "subtitle": "These integrations use Janus to provide a better experience for users.",
+      "cta": "Tell us about your integration",
       "items": [
-        "OIDC/OAuth2 providers for more services",
-        "Custom themes and plugins",
-        "Documentation and translations"
+        "Coinche",
+        "Poky"
       ]
     },
     "totp": {
@@ -86,25 +124,31 @@
       }
     },
     "pricing": {
-      "title": "Pricing",
-      "subtitle": "Free for individuals. Paid for teams and enterprises.",
+      "title": "Subscription & funding",
+      "subtitle": "Free for individuals. Optional subscription for extended features, privacy-friendly funding via donations and works council benefits.",
       "free": "Free",
       "freeFor": "For individuals",
       "freeFeatures": [
         "Sign in with Janus",
-        "MFA",
-        "Mange your app connections",
-        "Unlimited connected apps"
+        "MFA on your Janus account",
+        "Manage and revoke your app connections",
+        "Portal to see which apps use which of your data",
+        "Email alerts when new connections are created",
+        "Use your identity with out-of-the-box alternative apps (Drive, Photos, etc.) as they launch"
       ],
-      "paid": "Paid",
-      "paidFor": "For teams & enterprises",
-      "paidFeatures": ["Support & SLA"],
-      "cta": "Contact us"
+      "paid": "Subscription",
+      "paidFor": "For people and organizations who want to fund Janus and unlock more services",
+      "paidFeatures": [
+        "Fund Janus through a privacy-respecting subscription",
+        "Subscription purchasable via works council benefits where available",
+        "Priority access to new out-of-the-box applications (Drive, Photos, etc.)"
+      ],
+      "cta": "Stay informed about subscriptions"
     }
   },
   "footer": {
     "copyright": "© {{year}} Janus. All rights reserved.",
-    "builtWith": "Managed IAM"
+    "builtWith": "Managed Open Source IAM"
   },
   "social": {
     "github": "Janus on GitHub",
