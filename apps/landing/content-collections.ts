@@ -61,5 +61,5 @@ const governance = defineCollection({
 });
 
 export default defineConfig({
-  collections: [blog,governance],
+  collections: [blog, governance],
 });
