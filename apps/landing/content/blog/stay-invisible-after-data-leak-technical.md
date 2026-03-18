@@ -42,4 +42,3 @@ That changes what an attacker can do:
 Correlation attacks after a breach often rely on stable identifiers that can be re-used for discovery or recovery. By constraining which identity attribute is exposed to the RP in the first place (via the OIDC exchange mediated by Janus), email masking reduces the likelihood that a single breached dataset is enough to map the user to their other accounts.
 
 In short: one leak yields a less reusable identity token, which limits practical traceability.
-

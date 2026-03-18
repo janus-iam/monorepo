@@ -44,4 +44,3 @@ If you want fewer “links” between your online accounts, the practical move i
 2. Turn on email masking
 
 You get everyday usability, and you reduce the chance that one breached website becomes a roadmap to your other accounts.
-
