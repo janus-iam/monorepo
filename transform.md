@@ -12,7 +12,6 @@ The web app routes should be placed under apps/web/src/routes/account/
 @keycloak/keycloak-admin-client will be called in the packages/api through protected TRPC procedures.
 You will use i18n.
 
-
 Other pages to implement :
 
 - Show the user a glimpse of their recent activities

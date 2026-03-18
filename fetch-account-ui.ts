@@ -112,7 +112,9 @@ async function copyDirectory(src: string, dest: string) {
 
   const mkdirExitCode = await mkdirProc.exited;
   if (mkdirExitCode !== 0) {
-    throw new Error(`Failed to create destination directory: mkdir exited with code ${mkdirExitCode}`);
+    throw new Error(
+      `Failed to create destination directory: mkdir exited with code ${mkdirExitCode}`,
+    );
   }
 
   const proc = Bun.spawn({
