@@ -2,15 +2,15 @@
 
 I want you to :
 
-- extract all existing routes in keycloak account-ui in keycloak/js/apps/account-ui/src/routes.tsx in an array with a brief summary
+- extract all existing routes in keycloak account-ui in keycloak-account-ui-26.5.5/account-ui/src/routes.tsx in an array with a brief summary
 - identify what api endpoinds they are using and find in @keycloak/keycloak-admin-client which methods you can use to do the same thing in an array
 - using shadcn and @keycloak/keycloak-admin-client, impelment the same pages for all existing routes to implement them in apps/web
 
 Constraints :
-The web app will auth user with better-auth to keycloak through oidc.
+The web app will auth user with better-auth.
 The web app routes should be placed under apps/web/src/routes/account/
-@keycloak/keycloak-admin-client will be called in the packages/api through protected TRPC procedures.
-You will use i18n.
+@keycloak/keycloak-admin-client will be called in the packages/api through protected TRPC procedures and not in the web side.
+You will use i18n as in the landing page.
 
 Other pages to implement :
 
