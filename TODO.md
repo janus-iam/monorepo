@@ -1,4 +1,4 @@
-- [ ] Create a suite of pages where a user can register themself with mfa enabled by default :
+- [ ] Create a suite of pages where a user can register themself with mfa enabled by default and mandatory :
 
 - TOTP
 - Personal questions
@@ -15,14 +15,14 @@ To recover a lost account; user will need personal questions of recoverry code. 
 
 - [ ] Disable keycloak user account ui
 
-- [ ] Add a email proxy for privacy and anti data-leak
+- [ ] Add a email proxy for privacy and anti data-leak like AppleId
 
 - [ ] Plug Better Auth to Keycloak instances for user
-
-- [ ] Create a proper registering flow with MFA enforced
 
 - [ ] Define governance for the three realms (prod, dev, ops)
 
 - [ ] Automate keycloak account-ui monitoring and PR proposals with https://cursor.com/docs/cli/github-actions
 
-- [ ] Add tests for web app with auth
+- [ ] Add tests for the web app with auth
+
+- [x] Mutualize the landing and web tsconfig.json
