@@ -3,6 +3,7 @@ import * as schema from "@janus/db/schema/auth";
 import { env } from "@janus/env/server";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { genericOAuth, keycloak } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -21,5 +22,17 @@ export const auth = betterAuth({
       httpOnly: true,
     },
   },
-  plugins: [],
+  plugins: [
+    genericOAuth({
+      config: [
+        keycloak({
+          clientId: env.KEYCLOAK_CLIENT_ID,
+          clientSecret: env.KEYCLOAK_CLIENT_SECRET,
+          issuer: env.KEYCLOAK_ISSUER,
+          pkce: true,
+          scopes: ["openid", "profile", "email", "offline_access"],
+        }),
+      ],
+    }),
+  ],
 });

@@ -1,8 +1,10 @@
 {
   "extends": "@janus/config/tsconfig.app.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["src/*"],
       "@janus/ui/*": ["../../packages/ui/src/*"]
     }
   }

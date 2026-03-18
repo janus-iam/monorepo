@@ -35,7 +35,8 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
             toast.success("Sign in successful");
           },
           onError: (error) => {
-            toast.error(error.error.message || error.error.statusText);
+            const e = error as any;
+            toast.error(e?.error?.message || e?.error?.statusText);
           },
         },
       );
@@ -55,6 +56,23 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
   return (
     <div className="mx-auto w-full mt-10 max-w-md p-6">
       <h1 className="mb-6 text-center text-3xl font-bold">Welcome Back</h1>
+
+      <div className="mb-4">
+        <Button
+          type="button"
+          className="w-full"
+          variant="secondary"
+          onClick={async () => {
+            await authClient.signIn.oauth2({
+              providerId: "keycloak",
+              callbackURL: "/account",
+              errorCallbackURL: "/login",
+            });
+          }}
+        >
+          Continue with Keycloak
+        </Button>
+      </div>
 
       <form
         onSubmit={(e) => {
