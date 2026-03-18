@@ -1,16 +1,7 @@
 export {};
 
 const repo = "keycloak/keycloak";
-
-type ReleaseAsset = {
-  name: string;
-  browser_download_url: string;
-};
-
-type GithubRelease = {
-  tag_name: string;
-  assets: ReleaseAsset[];
-};
+const apiPackageJsonPath = "packages/api/package.json";
 
 function parseVersionArg(): string {
   const arg = process.argv[2]?.trim();
@@ -22,11 +13,44 @@ function hasVersionArg(): boolean {
   return !!arg;
 }
 
-async function getRelease(version: string): Promise<GithubRelease> {
-  const releasePath =
-    version === "latest" ? "releases/latest" : `releases/tags/${encodeURIComponent(version)}`;
+function stripSemverRange(version: string): string {
+  return version.trim().replace(/^[^0-9]*/, "");
+}
 
-  const res = await fetch(`https://api.github.com/repos/${repo}/${releasePath}`, {
+async function getCurrentVersion(): Promise<string> {
+  const file = Bun.file(apiPackageJsonPath);
+
+  if (!(await file.exists())) {
+    throw new Error(`Could not find ${apiPackageJsonPath}`);
+  }
+
+  const packageJson = (await file.json()) as {
+    dependencies?: Record<string, string>;
+    devDependencies?: Record<string, string>;
+  };
+
+  const rawVersion =
+    packageJson.dependencies?.["@keycloak/keycloak-admin-client"] ??
+    packageJson.devDependencies?.["@keycloak/keycloak-admin-client"];
+
+  if (!rawVersion) {
+    throw new Error(
+      `@keycloak/keycloak-admin-client was not found in dependencies/devDependencies of ${apiPackageJsonPath}`,
+    );
+  }
+
+  const cleanedVersion = stripSemverRange(rawVersion);
+  if (!cleanedVersion) {
+    throw new Error(
+      `Invalid @keycloak/keycloak-admin-client version '${rawVersion}' in ${apiPackageJsonPath}`,
+    );
+  }
+
+  return cleanedVersion;
+}
+
+async function getLatestVersion(): Promise<string> {
+  const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, {
     headers: {
       Accept: "application/vnd.github+json",
       "User-Agent": "bun-fetch-account-ui-script",
@@ -34,16 +58,11 @@ async function getRelease(version: string): Promise<GithubRelease> {
   });
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch release '${version}': ${res.status} ${res.statusText}`);
+    throw new Error(`Failed to fetch latest release: ${res.status} ${res.statusText}`);
   }
 
-  return (await res.json()) as GithubRelease;
-}
-
-function getAccountUiAsset(release: GithubRelease): ReleaseAsset | undefined {
-  return release.assets.find(
-    (a) => a.name.startsWith("keycloak-account-ui") && a.name.endsWith(".tgz"),
-  );
+  const data = (await res.json()) as { tag_name: string };
+  return data.tag_name;
 }
 
 function normalizeTagForPath(tag: string): string {
@@ -60,7 +79,7 @@ async function downloadFile(url: string, output: string) {
   await Bun.write(output, res);
 }
 
-async function extractTgz(archivePath: string, outputDir: string) {
+async function extractZip(archivePath: string, outputDir: string) {
   const mkdirProc = Bun.spawn({
     cmd: ["mkdir", "-p", outputDir],
     stdout: "ignore",
@@ -73,42 +92,97 @@ async function extractTgz(archivePath: string, outputDir: string) {
   }
 
   const proc = Bun.spawn({
-    cmd: ["tar", "-xzf", archivePath, "-C", outputDir],
+    cmd: ["unzip", "-q", archivePath, "-d", outputDir],
     stdout: "inherit",
     stderr: "inherit",
   });
 
   const exitCode = await proc.exited;
   if (exitCode !== 0) {
-    throw new Error(`Failed to extract archive: tar exited with code ${exitCode}`);
+    throw new Error(`Failed to extract archive: unzip exited with code ${exitCode}`);
+  }
+}
+
+async function copyDirectory(src: string, dest: string) {
+  const mkdirProc = Bun.spawn({
+    cmd: ["mkdir", "-p", dest],
+    stdout: "ignore",
+    stderr: "inherit",
+  });
+
+  const mkdirExitCode = await mkdirProc.exited;
+  if (mkdirExitCode !== 0) {
+    throw new Error(`Failed to create destination directory: mkdir exited with code ${mkdirExitCode}`);
+  }
+
+  const proc = Bun.spawn({
+    cmd: ["cp", "-r", src, dest],
+    stdout: "inherit",
+    stderr: "inherit",
+  });
+
+  const exitCode = await proc.exited;
+  if (exitCode !== 0) {
+    throw new Error(`Failed to copy directory: cp exited with code ${exitCode}`);
+  }
+}
+
+async function deletePath(path: string) {
+  const proc = Bun.spawn({
+    cmd: ["rm", "-rf", path],
+    stdout: "ignore",
+    stderr: "inherit",
+  });
+
+  const exitCode = await proc.exited;
+  if (exitCode !== 0) {
+    throw new Error(`Failed to delete path '${path}': rm exited with code ${exitCode}`);
   }
 }
 
 const requestedVersion = parseVersionArg();
-const release = await getRelease(requestedVersion);
+let resolvedVersion = requestedVersion;
 
-if (!hasVersionArg()) {
-  console.log(release.tag_name);
+if (requestedVersion === "latest") {
+  resolvedVersion = await getLatestVersion();
+  console.log(`Resolved latest release: ${resolvedVersion}`);
+}
+
+if (requestedVersion === "current") {
+  resolvedVersion = await getCurrentVersion();
+  console.log(resolvedVersion);
   process.exit(0);
 }
 
-const asset = getAccountUiAsset(release);
-
-if (!asset) {
-  throw new Error(`No keycloak-account-ui .tgz asset found for release '${release.tag_name}'.`);
+if (!hasVersionArg()) {
+  console.log(resolvedVersion);
+  process.exit(0);
 }
 
-const normalizedTag = normalizeTagForPath(release.tag_name);
-const archivePath = `keycloak-account-ui-${normalizedTag}.tgz`;
-const outputDir = `keycloak-account-ui-extracted-${normalizedTag}`;
+const normalizedTag = normalizeTagForPath(resolvedVersion);
+const archivePath = `keycloak-${normalizedTag}.zip`;
+const tempDir = `keycloak-${normalizedTag}-temp`;
+const outputDir = `keycloak-account-ui-${normalizedTag}`;
 
-console.log(`Resolved release: ${release.tag_name}`);
-console.log(`Asset URL: ${asset.browser_download_url}`);
+const downloadUrl = `https://github.com/${repo}/archive/refs/tags/${resolvedVersion}.zip`;
 
-await downloadFile(asset.browser_download_url, archivePath);
-console.log(`Downloaded ${archivePath}`);
+console.log(`Downloading source code from: ${downloadUrl}`);
+try {
+  await downloadFile(downloadUrl, archivePath);
+  console.log(`Downloaded ${archivePath}`);
 
-await extractTgz(archivePath, outputDir);
-console.log(`Extracted ${archivePath} to ${outputDir}`);
+  await extractZip(archivePath, tempDir);
+  console.log(`Extracted ${archivePath} to ${tempDir}`);
+
+  const extractedDir = `${tempDir}/keycloak-${resolvedVersion.replace(/^v/, "")}`;
+  const accountUiSrc = `${extractedDir}/js/apps/account-ui`;
+
+  await copyDirectory(accountUiSrc, outputDir);
+  console.log(`Copied account-ui from ${accountUiSrc} to ${outputDir}`);
+} finally {
+  await deletePath(tempDir);
+  await deletePath(archivePath);
+  console.log(`Deleted temporary artifacts: ${tempDir}, ${archivePath}`);
+}
 
 console.log("Done.");

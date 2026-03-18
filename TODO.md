@@ -22,3 +22,7 @@ To recover a lost account; user will need personal questions of recoverry code. 
 - [ ] Create a proper registering flow with MFA enforced
 
 - [ ] Define governance for the three realms (prod, dev, ops)
+
+- [ ] Automate keycloak account-ui monitoring and PR proposals with https://cursor.com/docs/cli/github-actions
+
+- [ ] Add tests for web app with auth
