@@ -37,7 +37,8 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
             toast.success("Sign up successful");
           },
           onError: (error) => {
-            toast.error(error.error.message || error.error.statusText);
+            const e = error as any;
+            toast.error(e?.error?.message || e?.error?.statusText);
           },
         },
       );

@@ -12,6 +12,16 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountIndexRouteImport } from './routes/account/index'
+import { Route as AccountResourcesRouteImport } from './routes/account/resources'
+import { Route as AccountOrganizationsRouteImport } from './routes/account/organizations'
+import { Route as AccountOid4vciRouteImport } from './routes/account/oid4vci'
+import { Route as AccountGroupsRouteImport } from './routes/account/groups'
+import { Route as AccountApplicationsRouteImport } from './routes/account/applications'
+import { Route as AccountContentComponentIdRouteImport } from './routes/account/content/$componentId'
+import { Route as AccountAccountSecuritySigningInRouteImport } from './routes/account/account-security/signing-in'
+import { Route as AccountAccountSecurityLinkedAccountsRouteImport } from './routes/account/account-security/linked-accounts'
+import { Route as AccountAccountSecurityDeviceActivityRouteImport } from './routes/account/account-security/device-activity'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -28,35 +38,169 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountIndexRoute = AccountIndexRouteImport.update({
+  id: '/account/',
+  path: '/account/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountResourcesRoute = AccountResourcesRouteImport.update({
+  id: '/account/resources',
+  path: '/account/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountOrganizationsRoute = AccountOrganizationsRouteImport.update({
+  id: '/account/organizations',
+  path: '/account/organizations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountOid4vciRoute = AccountOid4vciRouteImport.update({
+  id: '/account/oid4vci',
+  path: '/account/oid4vci',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountGroupsRoute = AccountGroupsRouteImport.update({
+  id: '/account/groups',
+  path: '/account/groups',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountApplicationsRoute = AccountApplicationsRouteImport.update({
+  id: '/account/applications',
+  path: '/account/applications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountContentComponentIdRoute =
+  AccountContentComponentIdRouteImport.update({
+    id: '/account/content/$componentId',
+    path: '/account/content/$componentId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AccountAccountSecuritySigningInRoute =
+  AccountAccountSecuritySigningInRouteImport.update({
+    id: '/account/account-security/signing-in',
+    path: '/account/account-security/signing-in',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AccountAccountSecurityLinkedAccountsRoute =
+  AccountAccountSecurityLinkedAccountsRouteImport.update({
+    id: '/account/account-security/linked-accounts',
+    path: '/account/account-security/linked-accounts',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AccountAccountSecurityDeviceActivityRoute =
+  AccountAccountSecurityDeviceActivityRouteImport.update({
+    id: '/account/account-security/device-activity',
+    path: '/account/account-security/device-activity',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/account/applications': typeof AccountApplicationsRoute
+  '/account/groups': typeof AccountGroupsRoute
+  '/account/oid4vci': typeof AccountOid4vciRoute
+  '/account/organizations': typeof AccountOrganizationsRoute
+  '/account/resources': typeof AccountResourcesRoute
+  '/account': typeof AccountIndexRoute
+  '/account/account-security/device-activity': typeof AccountAccountSecurityDeviceActivityRoute
+  '/account/account-security/linked-accounts': typeof AccountAccountSecurityLinkedAccountsRoute
+  '/account/account-security/signing-in': typeof AccountAccountSecuritySigningInRoute
+  '/account/content/$componentId': typeof AccountContentComponentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/account/applications': typeof AccountApplicationsRoute
+  '/account/groups': typeof AccountGroupsRoute
+  '/account/oid4vci': typeof AccountOid4vciRoute
+  '/account/organizations': typeof AccountOrganizationsRoute
+  '/account/resources': typeof AccountResourcesRoute
+  '/account': typeof AccountIndexRoute
+  '/account/account-security/device-activity': typeof AccountAccountSecurityDeviceActivityRoute
+  '/account/account-security/linked-accounts': typeof AccountAccountSecurityLinkedAccountsRoute
+  '/account/account-security/signing-in': typeof AccountAccountSecuritySigningInRoute
+  '/account/content/$componentId': typeof AccountContentComponentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/account/applications': typeof AccountApplicationsRoute
+  '/account/groups': typeof AccountGroupsRoute
+  '/account/oid4vci': typeof AccountOid4vciRoute
+  '/account/organizations': typeof AccountOrganizationsRoute
+  '/account/resources': typeof AccountResourcesRoute
+  '/account/': typeof AccountIndexRoute
+  '/account/account-security/device-activity': typeof AccountAccountSecurityDeviceActivityRoute
+  '/account/account-security/linked-accounts': typeof AccountAccountSecurityLinkedAccountsRoute
+  '/account/account-security/signing-in': typeof AccountAccountSecuritySigningInRoute
+  '/account/content/$componentId': typeof AccountContentComponentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/login'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/account/applications'
+    | '/account/groups'
+    | '/account/oid4vci'
+    | '/account/organizations'
+    | '/account/resources'
+    | '/account'
+    | '/account/account-security/device-activity'
+    | '/account/account-security/linked-accounts'
+    | '/account/account-security/signing-in'
+    | '/account/content/$componentId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/login'
-  id: '__root__' | '/' | '/dashboard' | '/login'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/account/applications'
+    | '/account/groups'
+    | '/account/oid4vci'
+    | '/account/organizations'
+    | '/account/resources'
+    | '/account'
+    | '/account/account-security/device-activity'
+    | '/account/account-security/linked-accounts'
+    | '/account/account-security/signing-in'
+    | '/account/content/$componentId'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/account/applications'
+    | '/account/groups'
+    | '/account/oid4vci'
+    | '/account/organizations'
+    | '/account/resources'
+    | '/account/'
+    | '/account/account-security/device-activity'
+    | '/account/account-security/linked-accounts'
+    | '/account/account-security/signing-in'
+    | '/account/content/$componentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
+  AccountApplicationsRoute: typeof AccountApplicationsRoute
+  AccountGroupsRoute: typeof AccountGroupsRoute
+  AccountOid4vciRoute: typeof AccountOid4vciRoute
+  AccountOrganizationsRoute: typeof AccountOrganizationsRoute
+  AccountResourcesRoute: typeof AccountResourcesRoute
+  AccountIndexRoute: typeof AccountIndexRoute
+  AccountAccountSecurityDeviceActivityRoute: typeof AccountAccountSecurityDeviceActivityRoute
+  AccountAccountSecurityLinkedAccountsRoute: typeof AccountAccountSecurityLinkedAccountsRoute
+  AccountAccountSecuritySigningInRoute: typeof AccountAccountSecuritySigningInRoute
+  AccountContentComponentIdRoute: typeof AccountContentComponentIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +226,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/': {
+      id: '/account/'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/resources': {
+      id: '/account/resources'
+      path: '/account/resources'
+      fullPath: '/account/resources'
+      preLoaderRoute: typeof AccountResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/organizations': {
+      id: '/account/organizations'
+      path: '/account/organizations'
+      fullPath: '/account/organizations'
+      preLoaderRoute: typeof AccountOrganizationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/oid4vci': {
+      id: '/account/oid4vci'
+      path: '/account/oid4vci'
+      fullPath: '/account/oid4vci'
+      preLoaderRoute: typeof AccountOid4vciRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/groups': {
+      id: '/account/groups'
+      path: '/account/groups'
+      fullPath: '/account/groups'
+      preLoaderRoute: typeof AccountGroupsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/applications': {
+      id: '/account/applications'
+      path: '/account/applications'
+      fullPath: '/account/applications'
+      preLoaderRoute: typeof AccountApplicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/content/$componentId': {
+      id: '/account/content/$componentId'
+      path: '/account/content/$componentId'
+      fullPath: '/account/content/$componentId'
+      preLoaderRoute: typeof AccountContentComponentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/account-security/signing-in': {
+      id: '/account/account-security/signing-in'
+      path: '/account/account-security/signing-in'
+      fullPath: '/account/account-security/signing-in'
+      preLoaderRoute: typeof AccountAccountSecuritySigningInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/account-security/linked-accounts': {
+      id: '/account/account-security/linked-accounts'
+      path: '/account/account-security/linked-accounts'
+      fullPath: '/account/account-security/linked-accounts'
+      preLoaderRoute: typeof AccountAccountSecurityLinkedAccountsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/account-security/device-activity': {
+      id: '/account/account-security/device-activity'
+      path: '/account/account-security/device-activity'
+      fullPath: '/account/account-security/device-activity'
+      preLoaderRoute: typeof AccountAccountSecurityDeviceActivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +303,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
+  AccountApplicationsRoute: AccountApplicationsRoute,
+  AccountGroupsRoute: AccountGroupsRoute,
+  AccountOid4vciRoute: AccountOid4vciRoute,
+  AccountOrganizationsRoute: AccountOrganizationsRoute,
+  AccountResourcesRoute: AccountResourcesRoute,
+  AccountIndexRoute: AccountIndexRoute,
+  AccountAccountSecurityDeviceActivityRoute:
+    AccountAccountSecurityDeviceActivityRoute,
+  AccountAccountSecurityLinkedAccountsRoute:
+    AccountAccountSecurityLinkedAccountsRoute,
+  AccountAccountSecuritySigningInRoute: AccountAccountSecuritySigningInRoute,
+  AccountContentComponentIdRoute: AccountContentComponentIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
