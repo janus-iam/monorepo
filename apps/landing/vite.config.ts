@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import contentCollections from "@content-collections/vite";
+import path from "node:path";
 
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
@@ -15,6 +16,9 @@ const config = defineConfig({
   ],
   resolve: {
     tsconfigPaths: true,
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
   },
 });
 
