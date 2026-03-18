@@ -7,10 +7,7 @@
 
 To recover a lost account; user will need personal questions of recoverry code. They will need to be set at accounrt creation.
 
-- [ ] Create a dashboard like https://github.com/keycloak/keycloak/tree/main/js/apps/account-ui with all pages for the user to manage they account using https://github.com/keycloak/keycloak/tree/main/js/libs/keycloak-admin-client :
-
-- copy endpoints queryiung
-- keep same functions
+- [ ] Create a dashboard like https://github.com/keycloak/keycloak/tree/main/js/apps/account-ui with all pages for the user to manage they account using https://github.com/keycloak/keycloak/tree/main/js/libs/keycloak-admin-client following [transform.md](./transform.md)
 
 - [ ] In the dashboard, add a page where the user can see the metrics related to the user theyself, queried from prometheus
 
@@ -18,4 +15,10 @@ To recover a lost account; user will need personal questions of recoverry code. 
 
 - [ ] Disable keycloak user account ui
 
-- [ ] Add a email proxy for privacy
+- [ ] Add a email proxy for privacy and anti data-leak
+
+- [ ] Plug Better Auth to Keycloak instances for user
+
+- [ ] Create a proper registering flow with MFA enforced
+
+- [ ] Define governance for the three realms (prod, dev, ops)
