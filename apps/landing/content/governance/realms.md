@@ -9,10 +9,10 @@ Janus comes with 3 realms.
 
 Realms are strictly separated spaces where users are present in one and only one realms.
 
-# Realm 1 : `prod`
+## Realm `prod`
 
-# Realm 2 : `dev`
+## Realm `dev`
 
-# Realm 3 : `ops`
+## Realm `ops`
 
 This realm only contains \*Ops related accounts for operations regarding Janus maintenance and exploitation.

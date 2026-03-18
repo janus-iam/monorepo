@@ -37,12 +37,9 @@ export default function Header() {
           <Link to="/blog" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
             {t("nav.blog")}
           </Link>
-          <Link to="/about" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
-            {t("nav.about")}
+          <Link to="/governance" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
+            {t("nav.governance")}
           </Link>
-          <a href="https://docs.janus.dev" className="nav-link" target="_blank" rel="noreferrer">
-            {t("nav.docs")}
-          </a>
         </div>
 
         <div className="ml-auto flex items-center gap-1.5 sm:ml-0 sm:gap-2">

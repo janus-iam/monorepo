@@ -9,20 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GovernanceIndexRouteImport } from './routes/governance.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as GovernanceSlugRouteImport } from './routes/governance.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GovernanceIndexRoute = GovernanceIndexRouteImport.update({
+  id: '/governance/',
+  path: '/governance/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -43,62 +43,62 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/blog': typeof BlogIndexRoute
+  '/governance': typeof GovernanceIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/blog': typeof BlogIndexRoute
+  '/governance': typeof GovernanceIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/governance/': typeof GovernanceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/blog/$slug' | '/governance/$slug' | '/blog'
+  fullPaths: '/' | '/blog/$slug' | '/governance/$slug' | '/blog' | '/governance'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/blog/$slug' | '/governance/$slug' | '/blog'
+  to: '/' | '/blog/$slug' | '/governance/$slug' | '/blog' | '/governance'
   id:
     | '__root__'
     | '/'
-    | '/about'
     | '/blog/$slug'
     | '/governance/$slug'
     | '/blog/'
+    | '/governance/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   BlogSlugRoute: typeof BlogSlugRoute
   GovernanceSlugRoute: typeof GovernanceSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  GovernanceIndexRoute: typeof GovernanceIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/governance/': {
+      id: '/governance/'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof GovernanceIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -127,10 +127,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   BlogSlugRoute: BlogSlugRoute,
   GovernanceSlugRoute: GovernanceSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
+  GovernanceIndexRoute: GovernanceIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
