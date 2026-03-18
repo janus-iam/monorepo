@@ -6,6 +6,11 @@
       "sourceType": "github",
       "computedHash": "a24359053259e55a75972cab4bf0b0e37e1393bac5f3756ec2e3a7b4b3778d2a"
     },
+    "janus-iam-skill": {
+      "source": "janus-iam/janus-iam-skill",
+      "sourceType": "github",
+      "computedHash": "3be0d60acaf4318c8ba3fac3bf079afc6a9cfff854bd7b6a5ec0b1f20e0ca8ea"
+    },
     "turborepo": {
       "source": "vercel/turborepo",
       "sourceType": "github",

@@ -1,3 +1,0 @@
-[submodule ".agents/skills/janus-iam-skills"]
-	path = .agents/skills/janus-iam-skills
-	url = https://github.com/janus-iam/janus-iam-skill
