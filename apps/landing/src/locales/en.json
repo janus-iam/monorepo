@@ -44,6 +44,21 @@
       "step3": "Callback, session created",
       "points": ["No tracking for ads", "Minimal data only", "You control revocation"]
     },
+    "mfaMethods": {
+      "title": "MFA methods",
+      "subtitle": "Janus requires at least two secure second-factor options and supports the following methods.",
+      "items": {
+        "emailVerificationLink": "Email verification link",
+        "deviceMagicLink": "Device magic link",
+        "totp": "TOTP",
+        "personalQuestions": "Efficient classic personal questions",
+        "passkey": "Passkey",
+        "strongPassword10Words": {
+          "part1": "Good old strong password with 10 words (as recommended by the NIST in",
+          "linkText": "SP 800-63B passwords"
+        }
+      }
+    },
     "services": {
       "title": "Connect to the services you use",
       "categories": {
@@ -73,6 +88,7 @@
       "goals": {
         "security": [
           "Enforce user security with MFA.",
+          "Mask or proxy your email identity to reduce cross-site correlation if an app database is breached.",
           "Apply GeoIP to detect abnormal new connections.",
           "Provide disk encryption for databases.",
           "Get audited for GDPR, SOC 2 Type II, ISO 27001, NIS 2, HDS, and SecNumCloud 3.2."

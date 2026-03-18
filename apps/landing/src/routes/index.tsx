@@ -3,6 +3,7 @@ import {
   Hero,
   DataPrivacy,
   AuthFlow,
+  MfaMethods,
   Services,
   Vision,
   Community,
@@ -24,6 +25,9 @@ function HomePage() {
         </SectionReveal>
         <SectionReveal delay={50}>
           <AuthFlow />
+        </SectionReveal>
+        <SectionReveal delay={75}>
+          <MfaMethods />
         </SectionReveal>
         {/*
         <SectionReveal delay={75}>
