@@ -8,12 +8,12 @@
     "demo": "Demo"
   },
   "hero": {
-    "kicker": "Managed Identity & Access",
+    "kicker": "Open Identity Platform",
     "title": "One identity. Everywhere.",
     "subtitle": "Centralized IAM for the open web. Neutral identity provider with MFA, monitoring, and strong privacy guarantees, designed for SOC 2 and GDPR-grade resilience across multi-cloud, multi-region infrastructure.",
     "ctaPrimary": "Get started",
     "ctaSecondary": "See pricing",
-    "stat": "Multi-cloud · Multi-region"
+    "stat": "Managed Identity & Access · Multi-cloud · Multi-region"
   },
   "sections": {
     "data": {
