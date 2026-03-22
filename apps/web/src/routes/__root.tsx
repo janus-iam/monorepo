@@ -22,6 +22,10 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
   head: () => ({
     meta: [
       {
+        name: "robots",
+        content: "noindex, nofollow, noarchive",
+      },
+      {
         title: "janus",
       },
       {
