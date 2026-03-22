@@ -5,14 +5,18 @@ pubDate: "Mar 18 2026"
 heroImage: "/images/lagoon-3.svg"
 ---
 
-Janus comes with 3 realms.
+Janus is built on Keycloak and ships with three realms. We name them after figures from the Roman stories around Janus—**canens**, **proca**, and **carna**—so the split between environments reads like one family tree: separate homes, same lineage.
 
-Realms are strictly separated spaces where users are present in one and only one realms.
+Each realm is a strictly isolated space: a user exists in **one realm only**, with no identity shared across realms.
 
-## Realm `prod`
+## Realm `prod` — **canens**
 
-## Realm `dev`
+Named for **Canens**, the daughter in Janus’s household—production is where live users and services live.
 
-## Realm `ops`
+## Realm `dev` — **proca**
 
-This realm only contains \*Ops related accounts for operations regarding Janus maintenance and exploitation.
+Named for **Proca**, the son’s line in that story—development and experimentation happen here, away from production.
+
+## Realm `ops` — **carna**
+
+Named for **Carna**, the maternal figure in the family—this realm holds only operations accounts used to run and maintain Janus itself (maintenance, monitoring, and day-to-day exploitation of the platform).
