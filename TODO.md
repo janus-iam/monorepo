@@ -3,16 +3,24 @@
 - TOTP
 - Personal questions
 - Recovery code
+- Seed
 - Verification email
 
 To recover a lost account; user will need personal questions of recoverry code. They will need to be set at accounrt creation.
 
+
+Each time, passord + TOTP mandatory are asked
+
 Recover methods :
+If TOTP is lost, reset procedure with see
+If password is lost, reset procedure personal questions
 
-Each time : passord + TOTP mandatory
+When user created in Keycloak API, set by default, verifyEmail, TOTP, Seed and Questions required questions
 
-If TOTP is lost, seed
-If password is lot, personal questions
+Once Seed is setup, remove the seed of requiredActions user dic
+Once personal questions are setup, remove the questions of requiredActions user dic
+
+- [ ] Add a blog post for the MFA methods
 
 - [ ] Create a dashboard like https://github.com/keycloak/keycloak/tree/main/js/apps/account-ui with all pages for the user to manage they account using https://github.com/keycloak/keycloak/tree/main/js/libs/keycloak-admin-client following [transform.md](./transform.md)
 
@@ -40,3 +48,5 @@ If password is lot, personal questions
 Take inspiration on https://github.com/arisusantolie/keycloak-totp-api-provider and https://deepwiki.com/search/can-i-create-a-java-extension_d6f847f8-6b97-4b5a-b32a-1c56b5986200?mode=fast
 
 - [ ] Create a page where user can set up or remove a totp. Keep multi devices support like Keycloak.
+
+- [ ] Create permanent admin account using terraform ?
