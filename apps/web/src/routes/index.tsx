@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { trpc } from "@/utils/trpc";
+import ArrowCta from "@/components/arrow-cta";
+import { Button } from "@janus/ui/components/button";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
@@ -43,6 +45,16 @@ function HomeComponent() {
                   ? "Connected"
                   : "Disconnected"}
             </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 hover:scale-150 transition-all duration-300">
+            <Button>Login</Button>
+            <ArrowCta className="text-white h-24 w-24 rotate-180"/>
+            </div>
+            <div className="flex items-center gap-2 hover:scale-150 transition-all duration-300">
+            <ArrowCta className="text-white h-24 w-24 rotate-180 scale-x-[-1]"/>
+            <Button>Register</Button>
+            </div>
           </div>
         </section>
       </div>
