@@ -50,11 +50,7 @@ function GovernanceIndex() {
           ) : null}
 
           <h2 className="m-0 text-2xl font-semibold text-[var(--sea-ink)]">
-            <Link
-              to="/governance/$slug"
-              params={{ slug: featured.slug }}
-              className="no-underline"
-            >
+            <Link to="/governance/$slug" params={{ slug: featured.slug }} className="no-underline">
               {featured.title}
             </Link>
           </h2>
@@ -79,11 +75,7 @@ function GovernanceIndex() {
             ) : null}
 
             <h2 className="m-0 text-2xl font-semibold text-[var(--sea-ink)]">
-              <Link
-                to="/governance/$slug"
-                params={{ slug: post.slug }}
-                className="no-underline"
-              >
+              <Link to="/governance/$slug" params={{ slug: post.slug }} className="no-underline">
                 {post.title}
               </Link>
             </h2>

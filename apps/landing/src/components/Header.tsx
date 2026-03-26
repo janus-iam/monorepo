@@ -37,7 +37,11 @@ export default function Header() {
           <Link to="/blog" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
             {t("nav.blog")}
           </Link>
-          <Link to="/governance" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
+          <Link
+            to="/governance"
+            className="nav-link"
+            activeProps={{ className: "nav-link is-active" }}
+          >
             {t("nav.governance")}
           </Link>
         </div>

@@ -13,6 +13,58 @@ There are 6 steps to complete :
 - Personal questions
 - Seed
 
+## TOTP
+
+Implemented with Keycloak Admin REST API
+
+## Personal questions
+
+Define 3 questions that the user will need to answer to register.
+2 only will be required to recover.
+
+You will store the questions chosen in a database in plain text and the answers in a hash.
+Questions should be generated like :
+
+Family members:
+
+- mom
+- dad
+- grandfather
+- grandmother
+- you
+
+Questions:
+
+- birth city
+
+What is {question} of {family member}
+
+## Recovery code
+
+Generate a recovery code that the user will need to use to recover their account if they lose their password.
+
+## Verification email
+
+Send a verification email to the user to verify their email.
+
+## Password
+
+Must be a X menomic words generated. They will be english.
+
+Encourage the user to create a story with this word.
+For example show "monkey car sun table oven" -> "A monkey wont ride a car, but loves the sun. I have a great table and a good oven".
+They can remember via multiplephrases. Be pedagological.
+
+## Verification email
+
+Use default Keycloak email verification procedure
+
+## Seed
+
+Generate a seed with bip39.mnemonicToSeedWebcrypto(mn); where mn is the chosen passphrase.
+
+You will store the seed in the db for recovery later if needed.
+
 AT each connnection, passord + TOTP mandatory are asked
 There are recovery methods :
 If TOTP is lost, reset procedure with seed.
@@ -26,7 +78,7 @@ Once personal questions are setup, remove the questions of requiredActions user 
 
 For registration screens, create a `/register/route.tsx` providing a parent layout and all steps who are each in one file `/register/STEP1.tsx` `/register/STEP2.tsx` etc
 At each step show a phrase like :
-"You might lose 3 minutes to create your account but we swear it will be worth it"
+"You might lose 3 minutes to create your account but we swear it will be worth it ;)"
 "Two more steps to go..."
 "Only one step remaining"
 "This is the last one !"
@@ -59,7 +111,13 @@ Use smooth animations for sliding between the steps etc !
 
 - [x] Mutualize the landing and web tsconfig.json
 
-- [ ] Add to landing page - [ ] https://magicui.design/docs/components/highlighter - [ ] https://magicui.design/docs/components/dotted-map - [ ] https://magicui.design/docs/components/light-rays - [ ] https://magicui.design/docs/components/striped-pattern - [ ] https://ui.aceternity.com/blocks/illustrations/testimonials-hover-illustration - [ ] https://ui.aceternity.com/components/gooey-input ?
+- [ ] Add to landing page
+  - [ ] https://magicui.design/docs/components/highlighter
+  - [ ] https://magicui.design/docs/components/dotted-map
+  - [ ] https://magicui.design/docs/components/light-rays
+  - [ ] https://magicui.design/docs/components/striped-pattern
+  - [ ] https://ui.aceternity.com/blocks/illustrations/testimonials-hover-illustration
+  - [ ] https://ui.aceternity.com/components/gooey-input ?
 
 - [ ] Create a Keycloak extension to implement TOTP lifecycle management admin API endpoints
       Take inspiration on https://github.com/arisusantolie/keycloak-totp-api-provider and https://deepwiki.com/search/can-i-create-a-java-extension_d6f847f8-6b97-4b5a-b32a-1c56b5986200?mode=fast
@@ -75,4 +133,6 @@ Use smooth animations for sliding between the steps etc !
 
 - [ ] Server will listen to NATS
 
-- [ ] Create workers for NATS messaging : - [ ] Connexion check
+- [ ] Create workers for NATS messaging
+
+- [ ] Connexion check
