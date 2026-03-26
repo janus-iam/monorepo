@@ -1,24 +1,37 @@
+- [ ] Create a page called `what-do-you-need` with two CTA buttons, one is `Sign In` and the other is `Register`; this will be a gateway to either the register flow or login with keycloak itself. After Sign in, redirect to `/dashboard`
+
+- [ ] Put the same fonts in web and landing
+
 - [ ] Create a suite of pages where a user can register themself with mfa enabled by default and mandatory :
 
+There are 6 steps to complete :
+
+- Email
+- Verification email
+- Username
 - TOTP
 - Personal questions
-- Recovery code
 - Seed
-- Verification email
 
-To recover a lost account; user will need personal questions of recoverry code. They will need to be set at accounrt creation.
+AT each connnection, passord + TOTP mandatory are asked
+There are recovery methods :
+If TOTP is lost, reset procedure with seed.
+If password is lost, reset procedure with personal questions.
 
+# Force user to complete steps :
 
-Each time, passord + TOTP mandatory are asked
-
-Recover methods :
-If TOTP is lost, reset procedure with see
-If password is lost, reset procedure personal questions
-
-When user created in Keycloak API, set by default, verifyEmail, TOTP, Seed and Questions required questions
-
+When user created in Keycloak API, set by defaul : verifyEmail, TOTP, Seed and Questions as Keycloak required questions.
 Once Seed is setup, remove the seed of requiredActions user dic
 Once personal questions are setup, remove the questions of requiredActions user dic
+
+For registration screens, create a `/register/route.tsx` providing a parent layout and all steps who are each in one file `/register/STEP1.tsx` `/register/STEP2.tsx` etc
+At each step show a phrase like :
+"You might lose 3 minutes to create your account but we swear it will be worth it"
+"Two more steps to go..."
+"Only one step remaining"
+"This is the last one !"
+
+Use smooth animations for sliding between the steps etc !
 
 - [ ] Add a blog post for the MFA methods
 
@@ -26,27 +39,40 @@ Once personal questions are setup, remove the questions of requiredActions user 
 
 - [ ] In the dashboard, add a page where the user can see the metrics related to the user theyself, queried from prometheus
 
+- [ ] In one of the page or in a new one, they should be able to manage their profile picture.
+
 - [ ] Add user profile picture using keycloak custom attribute field. However, compare multiuple implementations for this before doing it
 
-- [ ] Disable keycloak user account ui and user password or TOTP recovery
+- [ ] Disable keycloak user account ui and password recovery or TOTP recovery
 
 - [ ] Add a email proxy for privacy and anti data-leak like AppleId
 
 - [ ] Plug Better Auth to Keycloak instances for user
 
-- [ ] Define governance for the three realms (prod, dev, ops)
+- [x] Define governance for the three realms (prod, dev, ops)
 
-- [ ] Automate keycloak account-ui monitoring and PR proposals with https://cursor.com/docs/cli/github-actions
+- [ ] Automate keycloak account-ui app monitoring and PR proposals with https://cursor.com/docs/cli/github-actions
 
-- [ ] Mark somewhere against what version of keycloak is built the apps/web/src/routes/account pages
+- [ ] Mark somewhere against what version of keycloak is built the apps/web/src/routes/account pages and edit `scripts/fetch-account-ui.ts` accordingly
 
 - [ ] Add tests for the web app with auth
 
 - [x] Mutualize the landing and web tsconfig.json
 
-- [ ] Create a Keycloak extension to implement admin API endpoints for TOTP lifecycle management
-Take inspiration on https://github.com/arisusantolie/keycloak-totp-api-provider and https://deepwiki.com/search/can-i-create-a-java-extension_d6f847f8-6b97-4b5a-b32a-1c56b5986200?mode=fast
+- [ ] Add to landing page - [ ] https://magicui.design/docs/components/highlighter - [ ] https://magicui.design/docs/components/dotted-map - [ ] https://magicui.design/docs/components/light-rays - [ ] https://magicui.design/docs/components/striped-pattern - [ ] https://ui.aceternity.com/blocks/illustrations/testimonials-hover-illustration - [ ] https://ui.aceternity.com/components/gooey-input ?
+
+- [ ] Create a Keycloak extension to implement TOTP lifecycle management admin API endpoints
+      Take inspiration on https://github.com/arisusantolie/keycloak-totp-api-provider and https://deepwiki.com/search/can-i-create-a-java-extension_d6f847f8-6b97-4b5a-b32a-1c56b5986200?mode=fast
 
 - [ ] Create a page where user can set up or remove a totp. Keep multi devices support like Keycloak.
 
+- [ ] Write a message in the web app footer using https://vercel.com/docs/environment-variables/system-environment-variables saying :
+      "Built against commit sz5dq4d6q5s65d6qz5d6zq5d6zq5" with a link to the github repo commit.
+
+- [ ] Add requiredActions using Terraform
+
 - [ ] Create permanent admin account using terraform ?
+
+- [ ] Server will listen to NATS
+
+- [ ] Create workers for NATS messaging : - [ ] Connexion check
