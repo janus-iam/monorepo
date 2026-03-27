@@ -26,11 +26,11 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
         content: "noindex, nofollow, noarchive",
       },
       {
-        title: "janus",
+        title: "Janus",
       },
       {
         name: "description",
-        content: "janus is a web application",
+        content: "Janus is a open source IAM",
       },
     ],
     links: [

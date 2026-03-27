@@ -2,7 +2,7 @@ import React from "react";
 export type ArrowCtaElement = SVGSVGElement;
 export type ArrowCtaProps = React.SVGAttributes<SVGSVGElement>;
 
-const ArrowCta = React.forwardRef<ArrowCtaElement, ArrowCtaProps>((props, forwardedRef) => (
+export const ArrowCta = React.forwardRef<ArrowCtaElement, ArrowCtaProps>((props, forwardedRef) => (
   <svg
     width="78"
     height="87"
@@ -19,5 +19,3 @@ const ArrowCta = React.forwardRef<ArrowCtaElement, ArrowCtaProps>((props, forwar
   </svg>
 ));
 ArrowCta.displayName = "ArrowCta";
-
-export default ArrowCta;
