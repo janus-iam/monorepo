@@ -9,6 +9,7 @@ There are 6 steps to complete :
 - Email
 - Verification email
 - Username
+- Conditions of use etc Acceptation
 - TOTP
 - Personal questions
 - Seed
@@ -29,15 +30,23 @@ Family members:
 
 - mom
 - dad
-- grandfather
-- grandmother
+- mother father
+- mother mother
+- father father
+- father mother
 - you
 
 Questions:
 
 - birth city
+- first pet color
+- first pet name
 
 What is {question} of {family member}
+
+The user can refresh the questions combianiason if it doesnt work for him.
+
+They can also creates their own questions.
 
 ## Recovery code
 
