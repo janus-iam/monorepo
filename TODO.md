@@ -131,9 +131,9 @@ Use smooth animations for sliding between the steps etc !
 
 - Explore MapCN https://ui.tripled.work
 
-- [ ] Add to web app 
-      - [ ] for "what-do-you-need" page https://magicui.design/docs/components/striped-pattern 
-      - [ ] https://www.cult-ui.com/docs/components/family-button to switch color mode
+- [x] Add to web app dor "what-do-you-need" page https://magicui.design/docs/components/striped-pattern
+
+- [x] Add to web app https://www.cult-ui.com/docs/components/family-button to switch color mode
 
 - [ ] Create a Keycloak extension to implement TOTP lifecycle management admin API endpoints
       Take inspiration on https://github.com/arisusantolie/keycloak-totp-api-provider and https://deepwiki.com/search/can-i-create-a-java-extension_d6f847f8-6b97-4b5a-b32a-1c56b5986200?mode=fast

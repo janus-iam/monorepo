@@ -8,6 +8,7 @@ import type { trpc } from "@/utils/trpc";
 
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeFamilyToggle } from "@/components/theme-family-toggle";
 import { Toaster } from "sonner";
 
 import "../index.css";
@@ -55,6 +56,11 @@ function RootComponent() {
         <div className="grid grid-rows-[auto_1fr] h-svh">
           <Header />
           <Outlet />
+        </div>
+        <div className="pointer-events-none fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6">
+          <div className="pointer-events-auto">
+            <ThemeFamilyToggle />
+          </div>
         </div>
         <Toaster richColors />
       </ThemeProvider>

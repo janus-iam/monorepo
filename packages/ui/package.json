@@ -9,6 +9,7 @@
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
     "./components/magicui/*": "./src/components/magicui/*.tsx",
+    "./components/cult-ui/*": "./src/components/cult-ui/*.tsx",
     "./hooks/*": "./src/hooks/*.ts",
     "./postcss.config": "./postcss.config.mjs"
   },
