@@ -142,8 +142,8 @@ Use smooth animations for sliding between the steps etc !
 
 - [ ] Create a page where user can set up or remove a totp. Keep multi devices support like Keycloak.
 
-- [ ] Write a message in the web app footer using https://vercel.com/docs/environment-variables/system-environment-variables saying :
-      "Built against commit sz5dq4d6q5s65d6qz5d6zq5d6zq5" with a link to the github repo commit.
+- [x] Write a message in the web app footer using https://vercel.com/docs/environment-variables/system-environment-variables saying :
+      "Built against commit …" with a link to the github repo commit.
 
 - [ ] Add requiredActions using Terraform
 

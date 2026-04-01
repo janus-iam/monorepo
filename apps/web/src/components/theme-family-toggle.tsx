@@ -104,9 +104,7 @@ export function ThemeFamilyToggle() {
               onClick={() => handleTabClick(tab.id)}
               className={cn(
                 "relative z-10 rounded-[5px] px-2.5 py-1.5 text-xs font-medium transition-colors sm:text-sm",
-                activeTab === tab.id
-                  ? "text-white"
-                  : "text-neutral-500 hover:text-neutral-300",
+                activeTab === tab.id ? "text-white" : "text-neutral-500 hover:text-neutral-300",
               )}
               style={{ WebkitTapHighlightColor: "transparent" }}
             >
