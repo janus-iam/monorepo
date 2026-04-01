@@ -1,92 +1,129 @@
-import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "motion/react";
+import { KeyRound, UserPlus } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
-import { trpc } from "@/utils/trpc";
-import { ArrowCta } from "@/components/arrow-cta";
-import { StripedPattern } from "@janus/ui/components/magicui/striped-pattern";
+import { buttonVariants } from "@janus/ui/components/button";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@janus/ui/components/card";
 import { LightRays } from "@janus/ui/components/magicui/light-rays";
+import { StripedPattern } from "@janus/ui/components/magicui/striped-pattern";
+import { cn } from "@janus/ui/lib/utils";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
 });
 
+const panel = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.08 * i + 0.15, duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
+
 function HomeComponent() {
-  const healthCheck = useQuery(trpc.healthCheck.queryOptions());
-
-  const ctaContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.16,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const ctaAreaVariants = {
-    hidden: { opacity: 0, y: 18, scale: 0.98 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-    },
-  };
+  const reduceMotion = useReducedMotion();
 
   return (
-    <div className="container mx-auto max-w-3xl px-4 py-2 flex flex-col items-center justify-center text-center">
-      <LightRays className="absolute inset-0 -z-10" count={20} color="#fff" blur={8} speed={2000} length="400px" />
-          <h1 className="text-6xl font-bold">What do you mean ?</h1>
-          <h2 className="mb-2 font-medium">Yeees exactly like {" "} 
-            <a href="https://en.wikipedia.org/wiki/What_Do_You_Mean%3F" target="_blank" rel="noopener noreferrer" className="underline">
-            that🎧
-            </a>
-          </h2>
-      <div className="grid gap-6 w-full place-items-center">
-        <section className="rounded-lg p-4 w-full flex flex-col items-center">
-          <motion.div
-            className="flex items-center justify-center gap-2 w-full"
-            variants={ctaContainerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.div
-              className="relative flex h-[400px] w-full items-center justify-center gap-2"
-              variants={ctaAreaVariants}
-              whileHover={{ y: -10, scale: 1.04 }}
-              transition={{ type: "spring", stiffness: 240, damping: 20 }}
-            >
-              <Link to="/login">
-                <div className="text-7xl p-4 rounded-3xl shadow-2xl">Login</div>
-              </Link>
-              <motion.div
-                animate={{ y: [0, -9, 0] }}
-                transition={{ duration: 3.1, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <ArrowCta className="text-white h-80 w-96 rotate-180 scale-y-[-1] translate-y-1/3" />
-              </motion.div>
-              <StripedPattern className="mask-[radial-gradient(200px_circle_at_center,white,transparent)]" />
-            </motion.div>
-            <motion.div
-              className="relative flex h-[400px] w-full items-center justify-center gap-2"
-              variants={ctaAreaVariants}
-              whileHover={{ y: -10, scale: 1.04 }}
-              transition={{ type: "spring", stiffness: 240, damping: 20 }}
-            >
-              <motion.div
-                animate={{ y: [0, -11, 0] }}
-                transition={{ duration: 2.7, repeat: Infinity, ease: "easeInOut", delay: 0.15 }}
-              >
-                <ArrowCta className="text-white h-96 w-80 rotate-180 scale-x-[-1] -translate-y-1/3" />
-              </motion.div>
-              <Link to="/register">
-                <div className="text-7xl p-4 rounded-3xl shadow-2xl">Register</div>
-              </Link>
-              <StripedPattern className="mask-[radial-gradient(200px_circle_at_center,white,transparent)]" />
-            </motion.div>
+    <div className="relative isolate flex h-full min-h-0 flex-col overflow-hidden bg-background">
+      <LightRays
+        className="absolute inset-0 -z-20 rounded-[inherit]"
+        count={18}
+        color="oklch(0.6152 0.1657 26.98 / 0.2)"
+        blur={10}
+        speed={18}
+        length="72vh"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 text-foreground/10 dark:text-foreground/[0.07]"
+        aria-hidden
+      >
+        <StripedPattern className="mask-[radial-gradient(75%_55%_at_50%_18%,white,transparent)]" />
+      </div>
+
+      <div className="container flex flex-1 flex-col items-center justify-center px-4 py-10 md:py-14">
+        <motion.header
+          className="max-w-2xl text-center"
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p className="text-primary mb-3 text-[0.65rem] font-medium uppercase tracking-[0.28em] md:text-xs">
+            Open source IAM
+          </p>
+          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+            Identity and access, unified
+          </h1>
+          <p className="text-muted-foreground mx-auto mt-5 max-w-lg text-balance text-sm leading-relaxed md:text-base">
+            Authenticate users, manage sessions, and enforce access while keeping your stack under
+            your control.
+          </p>
+        </motion.header>
+
+        <motion.div
+          className="mt-12 grid w-full max-w-2xl gap-4 sm:grid-cols-2 sm:gap-5"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: {
+              transition: { staggerChildren: reduceMotion ? 0 : 0.1, delayChildren: 0.05 },
+            },
+          }}
+        >
+          <motion.div custom={0} variants={panel}>
+            <Card className="relative h-full border-border/80 bg-card/80 backdrop-blur-[2px] transition-[box-shadow,ring-color] hover:shadow-md hover:ring-1 hover:ring-primary/25">
+              <CardHeader className="pb-2">
+                <div className="text-primary mb-2 flex size-9 items-center justify-center ring-1 ring-primary/20 bg-primary/5">
+                  <KeyRound className="size-4" aria-hidden />
+                </div>
+                <CardTitle className="text-base md:text-lg">Sign in</CardTitle>
+                <CardDescription>Continue to your account and open the dashboard.</CardDescription>
+              </CardHeader>
+              <CardFooter className="border-border/60 flex flex-col gap-2 border-t pt-4 sm:flex-row sm:justify-end">
+                <Link
+                  to="/login"
+                  className={cn(
+                    buttonVariants({ variant: "default", size: "lg" }),
+                    "w-full justify-center sm:w-auto",
+                  )}
+                >
+                  Log in
+                </Link>
+              </CardFooter>
+            </Card>
           </motion.div>
-        </section>
+
+          <motion.div custom={1} variants={panel}>
+            <Card className="relative h-full border-border/80 bg-card/80 backdrop-blur-[2px] transition-[box-shadow,ring-color] hover:shadow-md hover:ring-1 hover:ring-primary/25">
+              <CardHeader className="pb-2">
+                <div className="text-primary mb-2 flex size-9 items-center justify-center ring-1 ring-primary/20 bg-primary/5">
+                  <UserPlus className="size-4" aria-hidden />
+                </div>
+                <CardTitle className="text-base md:text-lg">Create an account</CardTitle>
+                <CardDescription>
+                  Register to start using Janus with your organization.
+                </CardDescription>
+              </CardHeader>
+              <CardFooter className="border-border/60 flex flex-col gap-2 border-t pt-4 sm:flex-row sm:justify-end">
+                <Link
+                  to="/register"
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "lg" }),
+                    "w-full justify-center sm:w-auto",
+                  )}
+                >
+                  Register
+                </Link>
+              </CardFooter>
+            </Card>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
