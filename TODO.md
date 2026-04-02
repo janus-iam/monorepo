@@ -128,6 +128,8 @@ Use smooth animations for sliding between the steps etc !
 
 - [x] Mutualize the landing and web tsconfig.json
 
+- [ ] Rework on web app header
+
 - [ ] Add to landing page
   - [ ] https://magicui.design/docs/components/highlighter
   - [ ] https://magicui.design/docs/components/dotted-map
@@ -167,6 +169,8 @@ Use smooth animations for sliding between the steps etc !
 
 - [x] Write a message in the web app footer using https://vercel.com/docs/environment-variables/system-environment-variables saying :
       "Built against commit …" with a link to the github repo commit.
+
+- [ ] Fix it on Vercel env..
 
 - [ ] Create requiredActions using Terraform
 
