@@ -130,9 +130,9 @@ Use smooth animations for sliding between the steps etc !
 
 - Explore MapCN https://ui.tripled.work
 
-- [ ] Add to web app for "what-do-you-need" page https://magicui.design/docs/components/striped-pattern 
+- [ ] Add to web app for "what-do-you-need" page https://magicui.design/docs/components/striped-pattern
 
-- [ ]  Add to web app https://www.cult-ui.com/docs/components/family-button to switch color mode
+- [ ] Add to web app https://www.cult-ui.com/docs/components/family-button to switch color mode
 
 - [ ] Create a trpc public procedure for landing page analytics which forward to NATS
 
