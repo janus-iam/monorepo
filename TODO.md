@@ -4,14 +4,18 @@
 
 - [ ] Create a suite of pages where a user can register themself with mfa enabled by default and mandatory :
 
-There are 6 steps to complete :
+There are 8 steps to complete :
 
 - Email
 - Verification email
 - Username
+- Password
 - TOTP
 - Personal questions
 - Seed
+- Explain the viusal security signature while showing it for it for the first time and phishing prevention
+
+And then make a beautiful "Thank you screen" and goodbye screen.
 
 ## TOTP
 
@@ -85,11 +89,15 @@ At each step show a phrase like :
 
 Use smooth animations for sliding between the steps etc !
 
-- [ ] Add a blog post for the MFA methods
+- [ ] Add a blog post for all the MFA methods
+
+- [ ] Improve the theme and make it the same for apps/landing/src/routes/blog.$slug.tsx and apps/landing/src/routes/governance.$slug.tsx
 
 - [ ] Create a dashboard like https://github.com/keycloak/keycloak/tree/main/js/apps/account-ui with all pages for the user to manage they account using https://github.com/keycloak/keycloak/tree/main/js/libs/keycloak-admin-client following [transform.md](./transform.md)
 
-- [ ] In the dashboard, add a page where the user can see the metrics related to the user theyself, queried from prometheus
+- [ ] In the dashboard, add a page where the user can see the metrics related to the user theyself, queried from Clickhouse
+
+- [ ] See if we can disable keycloak user event collections since they are published to NATS via KETE and saved into Clickhouse
 
 - [ ] In one of the page or in a new one, they should be able to manage their profile picture.
 
@@ -122,21 +130,37 @@ Use smooth animations for sliding between the steps etc !
 
 - Explore MapCN https://ui.tripled.work
 
-- [ ] Add to web app
-      - [ ] for "what-do-you-need" page https://magicui.design/docs/components/striped-pattern
-      - [ ] https://www.cult-ui.com/docs/components/family-button to switch color mode
+- [ ] Add to web app for "what-do-you-need" page https://magicui.design/docs/components/striped-pattern 
+
+- [ ]  Add to web app https://www.cult-ui.com/docs/components/family-button to switch color mode
+
+- [ ] Create a trpc public procedure for landing page analytics which forward to NATS
+
+- [ ] Create a trpc private procedure for web app analytics which forwards to NATS
+
+- [ ] Add NATS event emission in existing TRPC procedures for meaningful analytics
+
+- [ ] Create a batched ingestion service from NATS to Clikhouse -> langage to be chosens
 
 - [ ] Create a Keycloak extension to implement TOTP lifecycle management admin API endpoints
       Take inspiration on https://github.com/arisusantolie/keycloak-totp-api-provider and https://deepwiki.com/search/can-i-create-a-java-extension_d6f847f8-6b97-4b5a-b32a-1c56b5986200?mode=fast
 
+- [ ] Add a Shared Secret Visual Method like https://github.com/teapot-labs/identeapots
+
+- [ ] Add a blog post explaining the role of the "Security Signature" Shared Secret Visual and where the passkeys comes in clutch to verify domain name. Open source -> More prone to be cloned and phising tries. Still a security for email to prevent fishing. Version for dev : "deterministic visual anti-phishing identifier" - accessible via une API avec un hash du user id
+
+- [ ] Add `janus_signature_hash` keycloak custom attribute field. Use server app to compute with `HMAC(user_id, server_secret)` and update it with the Keycalok API between Password and TOTP register flow steps
+
+- [ ] Create a ultra performant dedicated API for with cache and metrics integration with one endpoint : https://signature.getjanus.eu/v1/${user.attributes.janus_signature_hash}.svg. You will create a workload perf benchmark -> langage to be chosen
+
 - [ ] Generate a new keycloak admin client ?
- 
+
 - [ ] Create a page where user can set up or remove a totp. Keep multi devices support like Keycloak.
 
 - [ ] Write a message in the web app footer using https://vercel.com/docs/environment-variables/system-environment-variables saying :
       "Built against commit sz5dq4d6q5s65d6qz5d6zq5d6zq5" with a link to the github repo commit.
 
-- [ ] Add requiredActions using Terraform
+- [ ] Create requiredActions using Terraform
 
 - [ ] Create permanent admin account using terraform ?
 
