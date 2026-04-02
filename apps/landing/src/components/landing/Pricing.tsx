@@ -35,11 +35,14 @@ export function Pricing() {
             {t("sections.pricing.paid")}
           </h3>
           <p className="mb-4 text-sm text-[var(--kicker)]">{t("sections.pricing.paidFor")}</p>
-          <ul className="mb-6 list-disc space-y-2 pl-5 text-sm text-[var(--sea-ink-soft)]">
+          <ul className="mb-4 list-disc space-y-2 pl-5 text-sm text-[var(--sea-ink-soft)]">
             {paidFeatures.map((f, i) => (
               <li key={i}>{f}</li>
             ))}
           </ul>
+          <p className="mb-6 rounded-lg border border-dashed border-[var(--line)] bg-[var(--surface-strong)] px-3 py-2 text-sm text-[var(--sea-ink-soft)]">
+            {t("sections.pricing.stickerNote")}
+          </p>
           <a
             href="mailto:contact@janus.dev"
             className="inline-block rounded-full border border-[var(--sea-ink)] bg-[var(--sea-ink)] px-4 py-2 text-sm font-semibold text-[var(--sand)] no-underline transition hover:opacity-90"
