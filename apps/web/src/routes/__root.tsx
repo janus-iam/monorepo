@@ -6,8 +6,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 import type { trpc } from "@/utils/trpc";
 
-import { FooterComponent } from "@/components/footer";
-import Header from "@/components/header";
+import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeFamilyToggle } from "@/components/theme-family-toggle";
 import { Toaster } from "sonner";
@@ -55,9 +54,8 @@ function RootComponent() {
         storageKey="vite-ui-theme"
       >
         <div className="grid min-h-svh grid-rows-[auto_1fr_auto]">
-          <Header />
           <Outlet />
-          <FooterComponent />
+          <Footer />
         </div>
         <div className="pointer-events-none fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6">
           <div className="pointer-events-auto">

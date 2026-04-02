@@ -128,7 +128,7 @@ Use smooth animations for sliding between the steps etc !
 
 - [x] Mutualize the landing and web tsconfig.json
 
-- [ ] Rework on web app header
+- [x] Delete web app header - work will have to be done in register layout and dashboard layout
 
 - [ ] Add to landing page
   - [ ] https://magicui.design/docs/components/highlighter

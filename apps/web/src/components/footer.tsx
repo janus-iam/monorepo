@@ -1,6 +1,6 @@
 import { env } from "@janus/env/web";
 
-export function FooterComponent() {
+export function Footer() {
   return (
     <footer className="border-border/50 text-muted-foreground border-t px-4 py-2 pb-24 text-center text-xs md:pb-10">
       <p>
