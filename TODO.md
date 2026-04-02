@@ -10,6 +10,7 @@ There are 8 steps to complete :
 - Verification email
 - Username
 - Password
+- Conditions of use etc Acceptation
 - TOTP
 - Personal questions
 - Seed
@@ -33,15 +34,23 @@ Family members:
 
 - mom
 - dad
-- grandfather
-- grandmother
+- mother father
+- mother mother
+- father father
+- father mother
 - you
 
 Questions:
 
 - birth city
+- first pet color
+- first pet name
 
 What is {question} of {family member}
+
+The user can refresh the questions combianiason if it doesnt work for him.
+
+They can also creates their own questions.
 
 ## Recovery code
 
@@ -123,16 +132,11 @@ Use smooth animations for sliding between the steps etc !
   - [ ] https://magicui.design/docs/components/highlighter
   - [ ] https://magicui.design/docs/components/dotted-map
   - [ ] https://magicui.design/docs/components/light-rays
-  - [ ] https://magicui.design/docs/components/striped-pattern
   - [ ] https://ui.aceternity.com/blocks/illustrations/testimonials-hover-illustration
   - [ ] https://ui.aceternity.com/components/gooey-input ?
   - [ ] https://www.chamaac.com/components/sections/how-it-works to explain register flow
 
 - Explore MapCN https://ui.tripled.work
-
-- [ ] Add to web app for "what-do-you-need" page https://magicui.design/docs/components/striped-pattern
-
-- [ ] Add to web app https://www.cult-ui.com/docs/components/family-button to switch color mode
 
 - [ ] Create a trpc public procedure for landing page analytics which forward to NATS
 
@@ -142,6 +146,10 @@ Use smooth animations for sliding between the steps etc !
 
 - [ ] Create a batched ingestion service from NATS to Clikhouse -> langage to be chosens
 
+- [x] Add to web app dor "what-do-you-need" page https://magicui.design/docs/components/striped-pattern
+
+- [x] Add to web app https://www.cult-ui.com/docs/components/family-button to switch color mode
+
 - [ ] Create a Keycloak extension to implement TOTP lifecycle management admin API endpoints
       Take inspiration on https://github.com/arisusantolie/keycloak-totp-api-provider and https://deepwiki.com/search/can-i-create-a-java-extension_d6f847f8-6b97-4b5a-b32a-1c56b5986200?mode=fast
 
@@ -149,7 +157,7 @@ Use smooth animations for sliding between the steps etc !
 
 - [ ] Add a blog post explaining the role of the "Security Signature" Shared Secret Visual and where the passkeys comes in clutch to verify domain name. Open source -> More prone to be cloned and phising tries. Still a security for email to prevent fishing. Version for dev : "deterministic visual anti-phishing identifier" - accessible via une API avec un hash du user id
 
-- [ ] Add `janus_signature_hash` keycloak custom attribute field. Use server app to compute with `HMAC(user_id, server_secret)` and update it with the Keycalok API between Password and TOTP register flow steps
+- [ ] Add `janus_signature_hash` keycloak custom attribute field. Use server app to compute with `HMAC(user_id, server_secret)` and update it with the Keycalok API between `Conditions of use etc Acceptation` and `TOTP` register flow steps
 
 - [ ] Create a ultra performant dedicated API for with cache and metrics integration with one endpoint : https://signature.getjanus.eu/v1/${user.attributes.janus_signature_hash}.svg. You will create a workload perf benchmark -> langage to be chosen
 
@@ -157,8 +165,8 @@ Use smooth animations for sliding between the steps etc !
 
 - [ ] Create a page where user can set up or remove a totp. Keep multi devices support like Keycloak.
 
-- [ ] Write a message in the web app footer using https://vercel.com/docs/environment-variables/system-environment-variables saying :
-      "Built against commit sz5dq4d6q5s65d6qz5d6zq5d6zq5" with a link to the github repo commit.
+- [x] Write a message in the web app footer using https://vercel.com/docs/environment-variables/system-environment-variables saying :
+      "Built against commit …" with a link to the github repo commit.
 
 - [ ] Create requiredActions using Terraform
 
