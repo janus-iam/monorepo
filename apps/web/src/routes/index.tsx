@@ -36,13 +36,26 @@ function HomeComponent() {
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-2 flex flex-col items-center justify-center text-center">
-      <LightRays className="absolute inset-0 -z-10" count={20} color="#fff" blur={8} speed={2000} length="400px" />
-          <h1 className="text-6xl font-bold">What do you mean ?</h1>
-          <h2 className="mb-2 font-medium">Yeees exactly like {" "} 
-            <a href="https://en.wikipedia.org/wiki/What_Do_You_Mean%3F" target="_blank" rel="noopener noreferrer" className="underline">
-            that🎧
-            </a>
-          </h2>
+      <LightRays
+        className="absolute inset-0 -z-10"
+        count={20}
+        color="#fff"
+        blur={8}
+        speed={2000}
+        length="400px"
+      />
+      <h1 className="text-6xl font-bold">What do you mean ?</h1>
+      <h2 className="mb-2 font-medium">
+        Yeees exactly like{" "}
+        <a
+          href="https://en.wikipedia.org/wiki/What_Do_You_Mean%3F"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >
+          that🎧
+        </a>
+      </h2>
       <div className="grid gap-6 w-full place-items-center">
         <section className="rounded-lg p-4 w-full flex flex-col items-center">
           <motion.div

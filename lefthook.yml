@@ -1,7 +1,8 @@
 pre-commit:
   parallel: true
   jobs:
-    - run: bun run check
+    - run: bun run check {staged_files}
+      stage_fixed: true
 
 # EXAMPLE USAGE:
 #
