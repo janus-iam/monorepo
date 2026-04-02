@@ -53,6 +53,8 @@
     "db:watch": "turbo -F @janus/db db:watch",
     "db:stop": "turbo -F @janus/db db:stop",
     "db:down": "turbo -F @janus/db db:down",
+    "lint:fix": "oxlint --fix",
+    "fmt:check": "oxfmt --check",
     "check": "oxlint && oxfmt --write",
     "ruler:apply": "bunx @intellectronica/ruler@latest apply --local-only",
     "prepare": "lefthook install"
