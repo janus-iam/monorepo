@@ -5,6 +5,7 @@ import {
   AuthFlow,
   MfaMethods,
   Services,
+  Map,
   Vision,
   Community,
   Pricing,
@@ -34,6 +35,9 @@ function HomePage() {
           <Services />
         </SectionReveal>
         */}
+        <SectionReveal delay={75}>
+          <Map />
+        </SectionReveal>
         <SectionReveal delay={100}>
           <Vision />
         </SectionReveal>

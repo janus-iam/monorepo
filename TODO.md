@@ -132,7 +132,7 @@ Use smooth animations for sliding between the steps etc !
 
 - [ ] Add to landing page
   - [ ] https://magicui.design/docs/components/highlighter
-  - [ ] https://magicui.design/docs/components/dotted-map
+  - [x] https://magicui.design/docs/components/dotted-map
   - [ ] https://magicui.design/docs/components/light-rays
   - [ ] https://ui.aceternity.com/blocks/illustrations/testimonials-hover-illustration
   - [ ] https://ui.aceternity.com/components/gooey-input ?

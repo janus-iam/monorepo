@@ -7,3 +7,4 @@ export { Vision } from "./Vision";
 export { Community } from "./Community";
 export { Pricing } from "./Pricing";
 export { SectionReveal } from "./SectionReveal";
+export { Map } from "./Map";
