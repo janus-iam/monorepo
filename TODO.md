@@ -181,3 +181,9 @@ Use smooth animations for sliding between the steps etc !
 - [ ] Create workers for NATS messaging
 
 - [ ] Connexion check
+
+- [ ] Add OTEL observability to server app
+
+- [ ] Add skeletons for dashboards
+
+- [ ] Package Janus web, server and ingestion into a helm chart for easy deployment
