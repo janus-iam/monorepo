@@ -30,7 +30,6 @@ export const auth = betterAuth({
           clientSecret: env.KEYCLOAK_CLIENT_SECRET,
           issuer: env.KEYCLOAK_ISSUER,
           pkce: true,
-          scopes: ["openid", "profile", "email", "offline_access"],
         }),
       ],
     }),

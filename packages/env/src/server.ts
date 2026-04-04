@@ -12,7 +12,6 @@ export const env = createEnv({
     KEYCLOAK_CLIENT_SECRET: z.string().min(1),
     KEYCLOAK_ISSUER: z.url(),
     KEYCLOAK_BASE_URL: z.url(),
-    KEYCLOAK_RESOURCE_URL: z.url(),
     NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   },
   runtimeEnv: process.env,
