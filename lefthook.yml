@@ -3,7 +3,7 @@ pre-commit:
   jobs:
     - run: bun run lint:fix {staged_files}
       stage_fixed: true
-    - run: bun run fmt:check {staged_files}
+    - run: bun run fmt:write {staged_files}
       stage_fixed: true
 
 # EXAMPLE USAGE:
