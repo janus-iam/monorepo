@@ -187,26 +187,6 @@ function AccountIndexRoute() {
                 {t("application")}
               </a>
             </li>
-            <li>
-              <a className="underline" href="/account/groups">
-                {t("groups")}
-              </a>
-            </li>
-            <li>
-              <a className="underline" href="/account/organizations">
-                {t("organizations")}
-              </a>
-            </li>
-            <li>
-              <a className="underline" href="/account/resources">
-                {t("resources")}
-              </a>
-            </li>
-            <li>
-              <a className="underline" href="/account/oid4vci">
-                {t("verifiableCredentialsTitle")}
-              </a>
-            </li>
           </ul>
         </CardContent>
       </Card>

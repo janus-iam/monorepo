@@ -13,10 +13,6 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountIndexRouteImport } from './routes/account/index'
-import { Route as AccountResourcesRouteImport } from './routes/account/resources'
-import { Route as AccountOrganizationsRouteImport } from './routes/account/organizations'
-import { Route as AccountOid4vciRouteImport } from './routes/account/oid4vci'
-import { Route as AccountGroupsRouteImport } from './routes/account/groups'
 import { Route as AccountApplicationsRouteImport } from './routes/account/applications'
 import { Route as AccountContentComponentIdRouteImport } from './routes/account/content/$componentId'
 import { Route as AccountAccountSecuritySigningInRouteImport } from './routes/account/account-security/signing-in'
@@ -41,26 +37,6 @@ const IndexRoute = IndexRouteImport.update({
 const AccountIndexRoute = AccountIndexRouteImport.update({
   id: '/account/',
   path: '/account/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccountResourcesRoute = AccountResourcesRouteImport.update({
-  id: '/account/resources',
-  path: '/account/resources',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccountOrganizationsRoute = AccountOrganizationsRouteImport.update({
-  id: '/account/organizations',
-  path: '/account/organizations',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccountOid4vciRoute = AccountOid4vciRouteImport.update({
-  id: '/account/oid4vci',
-  path: '/account/oid4vci',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccountGroupsRoute = AccountGroupsRouteImport.update({
-  id: '/account/groups',
-  path: '/account/groups',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccountApplicationsRoute = AccountApplicationsRouteImport.update({
@@ -98,10 +74,6 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/account/applications': typeof AccountApplicationsRoute
-  '/account/groups': typeof AccountGroupsRoute
-  '/account/oid4vci': typeof AccountOid4vciRoute
-  '/account/organizations': typeof AccountOrganizationsRoute
-  '/account/resources': typeof AccountResourcesRoute
   '/account': typeof AccountIndexRoute
   '/account/account-security/device-activity': typeof AccountAccountSecurityDeviceActivityRoute
   '/account/account-security/linked-accounts': typeof AccountAccountSecurityLinkedAccountsRoute
@@ -113,10 +85,6 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/account/applications': typeof AccountApplicationsRoute
-  '/account/groups': typeof AccountGroupsRoute
-  '/account/oid4vci': typeof AccountOid4vciRoute
-  '/account/organizations': typeof AccountOrganizationsRoute
-  '/account/resources': typeof AccountResourcesRoute
   '/account': typeof AccountIndexRoute
   '/account/account-security/device-activity': typeof AccountAccountSecurityDeviceActivityRoute
   '/account/account-security/linked-accounts': typeof AccountAccountSecurityLinkedAccountsRoute
@@ -129,10 +97,6 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/account/applications': typeof AccountApplicationsRoute
-  '/account/groups': typeof AccountGroupsRoute
-  '/account/oid4vci': typeof AccountOid4vciRoute
-  '/account/organizations': typeof AccountOrganizationsRoute
-  '/account/resources': typeof AccountResourcesRoute
   '/account/': typeof AccountIndexRoute
   '/account/account-security/device-activity': typeof AccountAccountSecurityDeviceActivityRoute
   '/account/account-security/linked-accounts': typeof AccountAccountSecurityLinkedAccountsRoute
@@ -146,10 +110,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/login'
     | '/account/applications'
-    | '/account/groups'
-    | '/account/oid4vci'
-    | '/account/organizations'
-    | '/account/resources'
     | '/account'
     | '/account/account-security/device-activity'
     | '/account/account-security/linked-accounts'
@@ -161,10 +121,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/login'
     | '/account/applications'
-    | '/account/groups'
-    | '/account/oid4vci'
-    | '/account/organizations'
-    | '/account/resources'
     | '/account'
     | '/account/account-security/device-activity'
     | '/account/account-security/linked-accounts'
@@ -176,10 +132,6 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/login'
     | '/account/applications'
-    | '/account/groups'
-    | '/account/oid4vci'
-    | '/account/organizations'
-    | '/account/resources'
     | '/account/'
     | '/account/account-security/device-activity'
     | '/account/account-security/linked-accounts'
@@ -192,10 +144,6 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
   AccountApplicationsRoute: typeof AccountApplicationsRoute
-  AccountGroupsRoute: typeof AccountGroupsRoute
-  AccountOid4vciRoute: typeof AccountOid4vciRoute
-  AccountOrganizationsRoute: typeof AccountOrganizationsRoute
-  AccountResourcesRoute: typeof AccountResourcesRoute
   AccountIndexRoute: typeof AccountIndexRoute
   AccountAccountSecurityDeviceActivityRoute: typeof AccountAccountSecurityDeviceActivityRoute
   AccountAccountSecurityLinkedAccountsRoute: typeof AccountAccountSecurityLinkedAccountsRoute
@@ -231,34 +179,6 @@ declare module '@tanstack/react-router' {
       path: '/account'
       fullPath: '/account'
       preLoaderRoute: typeof AccountIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/account/resources': {
-      id: '/account/resources'
-      path: '/account/resources'
-      fullPath: '/account/resources'
-      preLoaderRoute: typeof AccountResourcesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/account/organizations': {
-      id: '/account/organizations'
-      path: '/account/organizations'
-      fullPath: '/account/organizations'
-      preLoaderRoute: typeof AccountOrganizationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/account/oid4vci': {
-      id: '/account/oid4vci'
-      path: '/account/oid4vci'
-      fullPath: '/account/oid4vci'
-      preLoaderRoute: typeof AccountOid4vciRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/account/groups': {
-      id: '/account/groups'
-      path: '/account/groups'
-      fullPath: '/account/groups'
-      preLoaderRoute: typeof AccountGroupsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/account/applications': {
@@ -304,10 +224,6 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
   AccountApplicationsRoute: AccountApplicationsRoute,
-  AccountGroupsRoute: AccountGroupsRoute,
-  AccountOid4vciRoute: AccountOid4vciRoute,
-  AccountOrganizationsRoute: AccountOrganizationsRoute,
-  AccountResourcesRoute: AccountResourcesRoute,
   AccountIndexRoute: AccountIndexRoute,
   AccountAccountSecurityDeviceActivityRoute:
     AccountAccountSecurityDeviceActivityRoute,
