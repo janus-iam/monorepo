@@ -10,12 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountIndexRouteImport } from './routes/account/index'
+import { Route as AccountApplicationsRouteImport } from './routes/account/applications'
+import { Route as AccountContentComponentIdRouteImport } from './routes/account/content/$componentId'
+import { Route as AccountAccountSecuritySigningInRouteImport } from './routes/account/account-security/signing-in'
+import { Route as AccountAccountSecurityLinkedAccountsRouteImport } from './routes/account/account-security/linked-accounts'
+import { Route as AccountAccountSecurityDeviceActivityRouteImport } from './routes/account/account-security/device-activity'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -28,35 +40,128 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountIndexRoute = AccountIndexRouteImport.update({
+  id: '/account/',
+  path: '/account/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountApplicationsRoute = AccountApplicationsRouteImport.update({
+  id: '/account/applications',
+  path: '/account/applications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountContentComponentIdRoute =
+  AccountContentComponentIdRouteImport.update({
+    id: '/account/content/$componentId',
+    path: '/account/content/$componentId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AccountAccountSecuritySigningInRoute =
+  AccountAccountSecuritySigningInRouteImport.update({
+    id: '/account/account-security/signing-in',
+    path: '/account/account-security/signing-in',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AccountAccountSecurityLinkedAccountsRoute =
+  AccountAccountSecurityLinkedAccountsRouteImport.update({
+    id: '/account/account-security/linked-accounts',
+    path: '/account/account-security/linked-accounts',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AccountAccountSecurityDeviceActivityRoute =
+  AccountAccountSecurityDeviceActivityRouteImport.update({
+    id: '/account/account-security/device-activity',
+    path: '/account/account-security/device-activity',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/account/applications': typeof AccountApplicationsRoute
+  '/account': typeof AccountIndexRoute
+  '/account/account-security/device-activity': typeof AccountAccountSecurityDeviceActivityRoute
+  '/account/account-security/linked-accounts': typeof AccountAccountSecurityLinkedAccountsRoute
+  '/account/account-security/signing-in': typeof AccountAccountSecuritySigningInRoute
+  '/account/content/$componentId': typeof AccountContentComponentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/account/applications': typeof AccountApplicationsRoute
+  '/account': typeof AccountIndexRoute
+  '/account/account-security/device-activity': typeof AccountAccountSecurityDeviceActivityRoute
+  '/account/account-security/linked-accounts': typeof AccountAccountSecurityLinkedAccountsRoute
+  '/account/account-security/signing-in': typeof AccountAccountSecuritySigningInRoute
+  '/account/content/$componentId': typeof AccountContentComponentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/account/applications': typeof AccountApplicationsRoute
+  '/account/': typeof AccountIndexRoute
+  '/account/account-security/device-activity': typeof AccountAccountSecurityDeviceActivityRoute
+  '/account/account-security/linked-accounts': typeof AccountAccountSecurityLinkedAccountsRoute
+  '/account/account-security/signing-in': typeof AccountAccountSecuritySigningInRoute
+  '/account/content/$componentId': typeof AccountContentComponentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/register'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/register'
+    | '/account/applications'
+    | '/account'
+    | '/account/account-security/device-activity'
+    | '/account/account-security/linked-accounts'
+    | '/account/account-security/signing-in'
+    | '/account/content/$componentId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/register'
-  id: '__root__' | '/' | '/dashboard' | '/register'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/register'
+    | '/account/applications'
+    | '/account'
+    | '/account/account-security/device-activity'
+    | '/account/account-security/linked-accounts'
+    | '/account/account-security/signing-in'
+    | '/account/content/$componentId'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/register'
+    | '/account/applications'
+    | '/account/'
+    | '/account/account-security/device-activity'
+    | '/account/account-security/linked-accounts'
+    | '/account/account-security/signing-in'
+    | '/account/content/$componentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
+  LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  AccountApplicationsRoute: typeof AccountApplicationsRoute
+  AccountIndexRoute: typeof AccountIndexRoute
+  AccountAccountSecurityDeviceActivityRoute: typeof AccountAccountSecurityDeviceActivityRoute
+  AccountAccountSecurityLinkedAccountsRoute: typeof AccountAccountSecurityLinkedAccountsRoute
+  AccountAccountSecuritySigningInRoute: typeof AccountAccountSecuritySigningInRoute
+  AccountContentComponentIdRoute: typeof AccountContentComponentIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +171,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -82,13 +194,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/': {
+      id: '/account/'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/applications': {
+      id: '/account/applications'
+      path: '/account/applications'
+      fullPath: '/account/applications'
+      preLoaderRoute: typeof AccountApplicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/content/$componentId': {
+      id: '/account/content/$componentId'
+      path: '/account/content/$componentId'
+      fullPath: '/account/content/$componentId'
+      preLoaderRoute: typeof AccountContentComponentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/account-security/signing-in': {
+      id: '/account/account-security/signing-in'
+      path: '/account/account-security/signing-in'
+      fullPath: '/account/account-security/signing-in'
+      preLoaderRoute: typeof AccountAccountSecuritySigningInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/account-security/linked-accounts': {
+      id: '/account/account-security/linked-accounts'
+      path: '/account/account-security/linked-accounts'
+      fullPath: '/account/account-security/linked-accounts'
+      preLoaderRoute: typeof AccountAccountSecurityLinkedAccountsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/account-security/device-activity': {
+      id: '/account/account-security/device-activity'
+      path: '/account/account-security/device-activity'
+      fullPath: '/account/account-security/device-activity'
+      preLoaderRoute: typeof AccountAccountSecurityDeviceActivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
+  LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  AccountApplicationsRoute: AccountApplicationsRoute,
+  AccountIndexRoute: AccountIndexRoute,
+  AccountAccountSecurityDeviceActivityRoute:
+    AccountAccountSecurityDeviceActivityRoute,
+  AccountAccountSecurityLinkedAccountsRoute:
+    AccountAccountSecurityLinkedAccountsRoute,
+  AccountAccountSecuritySigningInRoute: AccountAccountSecuritySigningInRoute,
+  AccountContentComponentIdRoute: AccountContentComponentIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

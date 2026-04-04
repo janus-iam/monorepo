@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { KeyRound, UserPlus } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
-import { buttonVariants } from "@janus/ui/components/button";
+import { Button, buttonVariants } from "@janus/ui/components/button";
 import {
   Card,
   CardDescription,
@@ -13,6 +13,8 @@ import {
 import { LightRays } from "@janus/ui/components/magicui/light-rays";
 import { StripedPattern } from "@janus/ui/components/magicui/striped-pattern";
 import { cn } from "@janus/ui/lib/utils";
+import { authClient } from "@/lib/auth-client";
+import { env } from "@janus/env/web";
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
@@ -86,15 +88,20 @@ function HomeComponent() {
                 <CardDescription>Continue to your account and open the dashboard.</CardDescription>
               </CardHeader>
               <CardFooter className="border-border/60 flex flex-col gap-2 border-t pt-4 sm:flex-row sm:justify-end">
-                <Link
-                  to="/login"
-                  className={cn(
-                    buttonVariants({ variant: "default", size: "lg" }),
-                    "w-full justify-center sm:w-auto",
-                  )}
+                <Button
+                  variant="default"
+                  size="lg"
+                  className="w-full justify-center sm:w-auto"
+                  onClick={async () => {
+                    await authClient.signIn.oauth2({
+                      providerId: "keycloak",
+                      callbackURL: env.VITE_PUBLIC_URL + "/account",
+                      errorCallbackURL: "/login",
+                    });
+                  }}
                 >
                   Log in
-                </Link>
+                </Button>
               </CardFooter>
             </Card>
           </motion.div>

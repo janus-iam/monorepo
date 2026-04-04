@@ -102,7 +102,7 @@ Use smooth animations for sliding between the steps etc !
 
 - [x] Improve the theme and make it the same for apps/landing/src/routes/blog.$slug.tsx and apps/landing/src/routes/governance.$slug.tsx
 
-- [ ] Create a dashboard like https://github.com/keycloak/keycloak/tree/main/js/apps/account-ui with all pages for the user to manage they account using https://github.com/keycloak/keycloak/tree/main/js/libs/keycloak-admin-client following [transform.md](./transform.md)
+- [x] Create a dashboard like https://github.com/keycloak/keycloak/tree/main/js/apps/account-ui with all pages for the user to manage they account using https://github.com/keycloak/keycloak/tree/main/js/libs/keycloak-admin-client following [transform.md](./transform.md) in a dedicated branch
 
 - [ ] In the dashboard, add a page where the user can see the metrics related to the user theyself, queried from Clickhouse
 
@@ -187,3 +187,4 @@ Use smooth animations for sliding between the steps etc !
 - [ ] Add skeletons for dashboards
 
 - [ ] Package Janus web, server and ingestion into a helm chart for easy deployment
+- [ ] Extend the dashboard to all possible realms
