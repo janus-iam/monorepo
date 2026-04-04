@@ -1,6 +1,6 @@
 - [ ] Create a page called `what-do-you-need` with two CTA buttons, one is `Sign In` and the other is `Register`; this will be a gateway to either the register flow or login with keycloak itself. After Sign in, redirect to `/dashboard`
 
-- [ ] Put the same fonts in web and landing
+- [x] Put the same fonts in web and landing
 
 - [ ] Create a suite of pages where a user can register themself with mfa enabled by default and mandatory :
 
@@ -138,7 +138,7 @@ Use smooth animations for sliding between the steps etc !
   - [ ] https://ui.aceternity.com/components/gooey-input ?
   - [ ] https://www.chamaac.com/components/sections/how-it-works to explain register flow
 
-- Explore MapCN https://ui.tripled.work
+- Explore MapCN & https://ui.tripled.work
 
 - [ ] Create a trpc public procedure for landing page analytics which forward to NATS
 
