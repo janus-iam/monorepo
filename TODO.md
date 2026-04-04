@@ -26,3 +26,5 @@ To recover a lost account; user will need personal questions of recoverry code. 
 - [ ] Add tests for the web app with auth
 
 - [x] Mutualize the landing and web tsconfig.json
+
+- [ ] Extend the dashboard to all possible realms

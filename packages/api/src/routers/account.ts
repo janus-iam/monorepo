@@ -1,8 +1,14 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
+import {
+  createKeycloakAdminClient,
+  getKeycloakUserId,
+  mapKeycloakNetworkError,
+} from "@janus/api/keycloak/admin-client";
+import { keycloakPublicPathFetch } from "@janus/api/keycloak/account-user-fetch";
+import { protectedProcedure, router } from "@janus/api";
 import { env } from "@janus/env/server";
-import { protectedProcedure, router } from "../index";
 
 const KeycloakUserProfileMetadataSchema = z.object({
   attributes: z.array(
@@ -19,17 +25,15 @@ const KeycloakUserProfileMetadataSchema = z.object({
   ),
 });
 
-const KeycloakUserRepresentationSchema = z
-  .object({
-    id: z.string().optional(),
-    username: z.string().optional(),
-    firstName: z.string().optional(),
-    lastName: z.string().optional(),
-    email: z.string().optional(),
-    attributes: z.record(z.string(), z.union([z.string(), z.array(z.string())])).optional(),
-    userProfileMetadata: KeycloakUserProfileMetadataSchema.optional(),
-  })
-  .passthrough();
+const KeycloakUserRepresentationSchema = z.object({
+  id: z.string().optional(),
+  username: z.string().optional(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  email: z.string().optional(),
+  attributes: z.record(z.string(), z.union([z.string(), z.array(z.string())])).optional(),
+  userProfileMetadata: KeycloakUserProfileMetadataSchema.optional(),
+});
 
 const DeviceRepresentationSchema = z.object({
   id: z.string(),
@@ -113,210 +117,134 @@ const ClientRepresentationSchema = z
   })
   .passthrough();
 
-const GroupSchema = z.object({
-  id: z.string().optional(),
-  name: z.string(),
-  path: z.string(),
-});
+type UserSessionLike = {
+  id?: string;
+  ipAddress?: string;
+  lastAccess?: number;
+  start?: number;
+  clients?: Record<string, string>;
+};
 
-const OrganizationRepresentationSchema = z
-  .object({
-    id: z.string().optional(),
-    name: z.string().optional(),
-  })
-  .passthrough();
-
-const ScopeSchema = z.object({
-  name: z.string(),
-  displayName: z.string().optional(),
-});
-
-const PermissionSchema = z.object({
-  username: z.string(),
-  email: z.string().optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  scopes: z.array(z.union([ScopeSchema, z.string()])),
-});
-
-const ResourceSchema = z.object({
-  _id: z.string(),
-  name: z.string(),
-  client: z.object({
-    baseUrl: z.string().optional(),
-    clientId: z.string(),
-    name: z.string().optional(),
-  }),
-  scopes: z.array(ScopeSchema).default([]),
-  uris: z.array(z.string()).default([]),
-  shareRequests: z.array(PermissionSchema).optional(),
-});
-
-const SupportedCredentialConfigurationSchema = z.object({
-  id: z.string(),
-  format: z.string(),
-  scope: z.string(),
-});
-
-const CredentialsIssuerSchema = z.object({
-  credential_issuer: z.string(),
-  credential_endpoint: z.string(),
-  authorization_servers: z.array(z.string()).default([]),
-  credential_configurations_supported: z.record(z.string(), SupportedCredentialConfigurationSchema),
-});
-
-function getKeycloakFromSession(ctx: { session: any }) {
-  const realm = ctx.session?.user?.keycloakRealm;
-  const accessToken = ctx.session?.user?.keycloakAccessToken;
-
-  if (!realm || !accessToken) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: "Missing Keycloak realm/access token in session",
-    });
-  }
-
-  return { realm: String(realm), accessToken: String(accessToken) };
+function formatSessionClients(clients?: Record<string, string>): string {
+  if (!clients || !Object.keys(clients).length) return "—";
+  return Object.values(clients).join(", ");
 }
 
-async function keycloakFetch(
-  input: {
-    realm: string;
-    accessToken: string;
-    path: string;
-    method?: "GET" | "POST" | "PUT" | "DELETE";
-    searchParams?: Record<string, string | number | boolean | undefined>;
-    body?: unknown;
-    isAccount?: boolean;
-    overrideBaseUrl?: string;
-  },
-  init?: { signal?: AbortSignal },
-) {
-  const baseUrl = (input.overrideBaseUrl ?? env.KEYCLOAK_BASE_URL).replace(/\/+$/, "");
-  const prefix =
-    input.isAccount === false ? "" : `/realms/${encodeURIComponent(input.realm)}/account`;
-  const url = new URL(`${baseUrl}${prefix}${input.path}`);
-
-  if (input.searchParams) {
-    for (const [k, v] of Object.entries(input.searchParams)) {
-      if (typeof v === "undefined") continue;
-      url.searchParams.set(k, String(v));
-    }
-  }
-
-  const res = await fetch(url, {
-    method: input.method ?? "GET",
-    headers: {
-      "content-type": "application/json",
-      authorization: `Bearer ${input.accessToken}`,
-    },
-    body: typeof input.body === "undefined" ? undefined : JSON.stringify(input.body),
-    signal: init?.signal,
+/** Approximation of Account-API “devices” from Admin `users.listSessions` (no OS/UA breakdown). */
+function userSessionsToDeviceRows(
+  sessions: UserSessionLike[],
+): z.infer<typeof DeviceRepresentationSchema>[] {
+  return sessions.map((s) => {
+    const sid = s.id ?? "";
+    const browser = formatSessionClients(s.clients);
+    return {
+      id: sid || "unknown-session",
+      ipAddress: s.ipAddress ?? "",
+      os: "—",
+      osVersion: "",
+      browser,
+      device: "",
+      lastAccess: s.lastAccess ?? 0,
+      current: false,
+      mobile: false,
+      sessions: [
+        {
+          id: sid,
+          ipAddress: s.ipAddress ?? "",
+          started: s.start ?? 0,
+          lastAccess: s.lastAccess ?? 0,
+          expires: 0,
+          browser,
+          current: false,
+          clients: Object.entries(s.clients ?? {}).map(([clientId, clientName]) => ({
+            clientId,
+            clientName,
+          })),
+        },
+      ],
+    };
   });
-
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new TRPCError({
-      code: res.status === 401 || res.status === 403 ? "UNAUTHORIZED" : "BAD_REQUEST",
-      message: `Keycloak request failed: ${res.status} ${res.statusText}`,
-      cause: text,
-    });
-  }
-
-  return res;
-}
-
-function parseLinkHeaderToParams(linkHeader: string | null) {
-  // Header example:
-  // <https://host/.../resources?first=5&max=5>; rel="next", <...>; rel="prev"
-  if (!linkHeader) return {};
-  const out: { next?: Record<string, string>; prev?: Record<string, string> } = {};
-
-  const parts = linkHeader
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-
-  for (const part of parts) {
-    const match = part.match(/^<([^>]+)>\s*;\s*rel="([^"]+)"/);
-    if (!match) continue;
-    const [, urlStr, rel] = match;
-    try {
-      if (!urlStr) continue;
-      const url = new URL(urlStr);
-      const params: Record<string, string> = {};
-      url.searchParams.forEach((v, k) => {
-        params[k] = v;
-      });
-      if (rel === "next") out.next = params;
-      if (rel === "prev") out.prev = params;
-    } catch {
-      // ignore
-    }
-  }
-
-  return out;
 }
 
 export const accountRouter = router({
   getPersonalInfo: protectedProcedure
     .output(KeycloakUserRepresentationSchema)
-    .query(async ({ ctx, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch(
-        { realm, accessToken, path: "/", searchParams: { userProfileMetadata: true } },
-        { signal },
-      );
-      return KeycloakUserRepresentationSchema.parse(await res.json());
+    .query(async ({ ctx }) => {
+      try {
+        const kc = await createKeycloakAdminClient();
+        const realm = env.KEYCLOAK_REALM;
+        const userId = getKeycloakUserId(ctx);
+        const user = await kc.users.findOne({
+          id: userId,
+          realm,
+          userProfileMetadata: true,
+        });
+        if (!user) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Keycloak user not found" });
+        }
+        return KeycloakUserRepresentationSchema.parse(user);
+      } catch (e) {
+        mapKeycloakNetworkError(e);
+      }
     }),
 
-  getSupportedLocales: protectedProcedure
-    .output(z.array(z.string()))
-    .query(async ({ ctx, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch(
-        { realm, accessToken, path: "/supportedLocales" },
-        { signal },
-      );
-      return z.array(z.string()).parse(await res.json());
-    }),
+  getSupportedLocales: protectedProcedure.output(z.array(z.string())).query(async ({ ctx }) => {
+    try {
+      const kc = await createKeycloakAdminClient();
+      const locales = await kc.realms.getRealmSpecificLocales({
+        realm: env.KEYCLOAK_REALM,
+      });
+      return z.array(z.string()).parse(locales);
+    } catch (e) {
+      mapKeycloakNetworkError(e);
+    }
+  }),
 
   savePersonalInfo: protectedProcedure
     .input(KeycloakUserRepresentationSchema)
-    .mutation(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      await keycloakFetch(
-        { realm, accessToken, path: "/", method: "POST", body: input },
-        { signal },
-      );
-      return { ok: true as const };
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const kc = await createKeycloakAdminClient();
+        const realm = env.KEYCLOAK_REALM;
+        const userId = getKeycloakUserId(ctx);
+        const { userProfileMetadata: _m, ...payload } = input;
+        await kc.users.update({ id: userId, realm }, { ...payload, id: userId });
+        return { ok: true as const };
+      } catch (e) {
+        mapKeycloakNetworkError(e);
+      }
     }),
 
   getDevices: protectedProcedure
     .output(z.array(DeviceRepresentationSchema))
-    .query(async ({ ctx, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch(
-        { realm, accessToken, path: "/sessions/devices" },
-        { signal },
-      );
-      return z.array(DeviceRepresentationSchema).parse(await res.json());
+    .query(async ({ ctx }) => {
+      try {
+        const kc = await createKeycloakAdminClient();
+        const realm = env.KEYCLOAK_REALM;
+        const userId = getKeycloakUserId(ctx);
+        const sessions = await kc.users.listSessions({ id: userId, realm });
+        return z.array(DeviceRepresentationSchema).parse(userSessionsToDeviceRows(sessions));
+      } catch (e) {
+        mapKeycloakNetworkError(e);
+      }
     }),
 
   deleteSession: protectedProcedure
     .input(z.object({ id: z.string().optional() }))
-    .mutation(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      await keycloakFetch(
-        {
-          realm,
-          accessToken,
-          path: `/sessions${input.id ? `/${encodeURIComponent(input.id)}` : ""}`,
-          method: "DELETE",
-        },
-        { signal },
-      );
-      return { ok: true as const };
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const kc = await createKeycloakAdminClient();
+        const realm = env.KEYCLOAK_REALM;
+        const userId = getKeycloakUserId(ctx);
+        if (input.id) {
+          await kc.realms.removeSession({ realm, sessionId: input.id });
+        } else {
+          await kc.users.logout({ id: userId, realm });
+        }
+        return { ok: true as const };
+      } catch (e) {
+        mapKeycloakNetworkError(e);
+      }
     }),
 
   getLinkedAccounts: protectedProcedure
@@ -329,220 +257,152 @@ export const accountRouter = router({
       }),
     )
     .output(z.array(LinkedAccountRepresentationSchema))
-    .query(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch(
-        {
+    .query(async ({ ctx, input }) => {
+      try {
+        const kc = await createKeycloakAdminClient();
+        const realm = env.KEYCLOAK_REALM;
+        const userId = getKeycloakUserId(ctx);
+        if (input.linked) {
+          const fed = await kc.users.listFederatedIdentities({ id: userId, realm });
+          const rows = fed.map((f) => ({
+            connected: true as const,
+            providerAlias: f.identityProvider ?? "",
+            providerName: f.identityProvider ?? "",
+            displayName: f.userName ?? f.identityProvider ?? "",
+            linkedUsername: f.userName,
+            social: true as const,
+          }));
+          return z.array(LinkedAccountRepresentationSchema).parse(rows);
+        }
+        const linkedAliases = new Set(
+          (await kc.users.listFederatedIdentities({ id: userId, realm }))
+            .map((f) => f.identityProvider)
+            .filter(Boolean) as string[],
+        );
+        const providers = await kc.identityProviders.find({
           realm,
-          accessToken,
-          path: "/linked-accounts",
-          searchParams: input,
-        },
-        { signal },
-      );
-      return z.array(LinkedAccountRepresentationSchema).parse(await res.json());
+          first: input.first,
+          max: input.max,
+          search: input.search,
+        });
+        const rows = providers
+          .filter((p) => p.alias && !linkedAliases.has(p.alias))
+          .map((p) => ({
+            connected: false as const,
+            providerAlias: p.alias ?? "",
+            providerName: p.alias ?? "",
+            displayName: p.displayName ?? p.alias ?? "",
+            social: true as const,
+          }));
+        return z.array(LinkedAccountRepresentationSchema).parse(rows);
+      } catch (e) {
+        mapKeycloakNetworkError(e);
+      }
     }),
 
   unlinkAccount: protectedProcedure
     .input(z.object({ providerName: z.string().min(1) }))
-    .mutation(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      await keycloakFetch(
-        {
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const kc = await createKeycloakAdminClient();
+        const realm = env.KEYCLOAK_REALM;
+        const userId = getKeycloakUserId(ctx);
+        await kc.users.delFromFederatedIdentity({
+          id: userId,
           realm,
-          accessToken,
-          path: `/linked-accounts/${encodeURIComponent(input.providerName)}`,
-          method: "DELETE",
-        },
-        { signal },
-      );
-      return { ok: true as const };
+          federatedIdentityId: input.providerName,
+        });
+        return { ok: true as const };
+      } catch (e) {
+        mapKeycloakNetworkError(e);
+      }
     }),
 
   getCredentials: protectedProcedure
     .output(z.array(CredentialContainerSchema))
-    .query(async ({ ctx, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch({ realm, accessToken, path: "/credentials" }, { signal });
-      return z.array(CredentialContainerSchema).parse(await res.json());
+    .query(async ({ ctx }) => {
+      try {
+        const kc = await createKeycloakAdminClient();
+        const realm = env.KEYCLOAK_REALM;
+        const userId = getKeycloakUserId(ctx);
+        const creds = await kc.users.getCredentials({ id: userId, realm });
+        const rows = creds.map((c) => ({
+          type: c.type ?? "credential",
+          category: "GENERAL",
+          displayName: c.userLabel ?? c.type ?? "Credential",
+          userCredentialMetadatas: c.id ? [{ id: c.id, type: c.type }] : [],
+        }));
+        return z.array(CredentialContainerSchema).parse(rows);
+      } catch (e) {
+        mapKeycloakNetworkError(e);
+      }
     }),
 
   getApplications: protectedProcedure
     .output(z.array(ClientRepresentationSchema))
-    .query(async ({ ctx, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch({ realm, accessToken, path: "/applications" }, { signal });
-      return z.array(ClientRepresentationSchema).parse(await res.json());
+    .query(async ({ ctx }) => {
+      try {
+        const kc = await createKeycloakAdminClient();
+        const realm = env.KEYCLOAK_REALM;
+        const userId = getKeycloakUserId(ctx);
+        const consents = await kc.users.listConsents({ id: userId, realm });
+        const rows = [];
+        for (const c of consents) {
+          if (!c.clientId) continue;
+          const found = await kc.clients.find({ realm, clientId: c.clientId });
+          const client = found[0];
+          rows.push({
+            clientId: c.clientId,
+            clientName: client?.name ?? client?.clientId ?? c.clientId,
+            description: client?.description,
+            userConsentRequired: client?.consentRequired,
+            inUse: undefined,
+            offlineAccess: undefined,
+            baseUrl: client?.baseUrl,
+            effectiveUrl: undefined,
+            logoUri: client?.attributes?.["logoUri"],
+            policyUri: undefined,
+            tosUri: undefined,
+            consent: {
+              grantedScopes: (c.grantedClientScopes ?? []).map((scopeId) => ({
+                id: scopeId,
+                name: scopeId,
+              })),
+              createdDate: c.createdDate,
+              lastUpdatedDate: c.lastUpdatedDate,
+            },
+          });
+        }
+        return z.array(ClientRepresentationSchema).parse(rows);
+      } catch (e) {
+        mapKeycloakNetworkError(e);
+      }
     }),
 
   deleteConsent: protectedProcedure
     .input(z.object({ clientId: z.string().min(1) }))
-    .mutation(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      await keycloakFetch(
-        {
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const kc = await createKeycloakAdminClient();
+        const realm = env.KEYCLOAK_REALM;
+        const userId = getKeycloakUserId(ctx);
+        await kc.users.revokeConsent({
+          id: userId,
           realm,
-          accessToken,
-          path: `/applications/${encodeURIComponent(input.clientId)}/consent`,
-          method: "DELETE",
-        },
-        { signal },
-      );
-      return { ok: true as const };
+          clientId: input.clientId,
+        });
+        return { ok: true as const };
+      } catch (e) {
+        mapKeycloakNetworkError(e);
+      }
     }),
 
-  getGroups: protectedProcedure.output(z.array(GroupSchema)).query(async ({ ctx, signal }) => {
-    const { realm, accessToken } = getKeycloakFromSession(ctx);
-    const res = await keycloakFetch({ realm, accessToken, path: "/groups" }, { signal });
-    return z.array(GroupSchema).parse(await res.json());
-  }),
-
-  getOrganizations: protectedProcedure
-    .output(z.array(OrganizationRepresentationSchema))
-    .query(async ({ ctx, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch({ realm, accessToken, path: "/organizations" }, { signal });
-      return z.array(OrganizationRepresentationSchema).parse(await res.json());
-    }),
-
-  getResources: protectedProcedure
-    .input(
-      z.object({
-        shared: z.boolean().optional().default(false),
-        params: z.record(z.string(), z.string()).default({ first: "0", max: "5" }),
-      }),
-    )
-    .output(
-      z.object({
-        data: z.array(ResourceSchema),
-        links: z.object({
-          next: z.record(z.string(), z.string()).optional(),
-          prev: z.record(z.string(), z.string()).optional(),
-        }),
-      }),
-    )
-    .query(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const path = input.shared ? "/resources/shared-with-me" : "/resources";
-      const res = await keycloakFetch(
-        { realm, accessToken, path, searchParams: input.params },
-        { signal },
-      );
-      const data = z.array(ResourceSchema).parse(await res.json());
-      const links = parseLinkHeaderToParams(res.headers.get("link"));
-      return { data, links };
-    }),
-
-  getPermissionRequests: protectedProcedure
-    .input(z.object({ resourceId: z.string().min(1) }))
-    .output(z.array(PermissionSchema))
-    .query(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch(
-        {
-          realm,
-          accessToken,
-          path: `/resources/${encodeURIComponent(input.resourceId)}/permissions/requests`,
-        },
-        { signal },
-      );
-      return z.array(PermissionSchema).parse(await res.json());
-    }),
-
-  getResourcePermissions: protectedProcedure
-    .input(z.object({ resourceId: z.string().min(1) }))
-    .output(z.array(PermissionSchema))
-    .query(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch(
-        {
-          realm,
-          accessToken,
-          path: `/resources/${encodeURIComponent(input.resourceId)}/permissions`,
-        },
-        { signal },
-      );
-      return z.array(PermissionSchema).parse(await res.json());
-    }),
-
-  updateResourcePermissions: protectedProcedure
-    .input(z.object({ resourceId: z.string().min(1), permissions: z.array(PermissionSchema) }))
-    .mutation(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      await keycloakFetch(
-        {
-          realm,
-          accessToken,
-          path: `/resources/${encodeURIComponent(input.resourceId)}/permissions`,
-          method: "PUT",
-          body: input.permissions,
-        },
-        { signal },
-      );
-      return { ok: true as const };
-    }),
-
-  getCredentialIssuer: protectedProcedure
-    .output(CredentialsIssuerSchema)
-    .query(async ({ ctx, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch(
-        {
-          realm,
-          accessToken,
-          isAccount: false,
-          path: `/realms/${encodeURIComponent(realm)}/.well-known/openid-credential-issuer`,
-        },
-        { signal },
-      );
-      return CredentialsIssuerSchema.parse(await res.json());
-    }),
-
-  requestVcOffer: protectedProcedure
-    .input(
-      z.object({
-        credentialIssuer: z.string().url(),
-        credential_configuration_id: z.string().min(1),
-        width: z.number().int().min(100).max(1000).default(500),
-        height: z.number().int().min(100).max(1000).default(500),
-      }),
-    )
-    .output(z.object({ dataUrl: z.string() }))
-    .mutation(async ({ ctx, input, signal }) => {
-      const { realm, accessToken } = getKeycloakFromSession(ctx);
-      const res = await keycloakFetch(
-        {
-          realm,
-          accessToken,
-          isAccount: false,
-          overrideBaseUrl: input.credentialIssuer.replace(/\/+$/, ""),
-          path: "/protocol/oid4vc/credential-offer-uri",
-          searchParams: {
-            credential_configuration_id: input.credential_configuration_id,
-            type: "qr-code",
-            width: input.width,
-            height: input.height,
-          },
-        },
-        { signal },
-      );
-      const buf = Buffer.from(await res.arrayBuffer());
-      const dataUrl = `data:${res.headers.get("content-type") ?? "image/png"};base64,${buf.toString("base64")}`;
-      return { dataUrl };
-    }),
-
-  getContentJson: protectedProcedure.output(z.array(z.unknown())).query(async ({ ctx, signal }) => {
-    const { realm, accessToken } = getKeycloakFromSession(ctx);
-    const res = await keycloakFetch(
-      {
-        realm,
-        accessToken,
-        isAccount: false,
-        overrideBaseUrl: env.KEYCLOAK_RESOURCE_URL.replace(/\/+$/, ""),
-        path: "/content.json",
-      },
-      { signal },
-    );
+  getContentJson: protectedProcedure.output(z.array(z.unknown())).query(async ({ signal }) => {
+    const res = await keycloakPublicPathFetch({
+      baseUrl: env.KEYCLOAK_BASE_URL,
+      path: "/content.json",
+      signal,
+    });
     return z.array(z.unknown()).parse(await res.json());
   }),
 });
