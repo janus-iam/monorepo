@@ -137,6 +137,12 @@
         "appleBuiltIn": "Built-in (Settings → Passwords)"
       }
     },
+    "map": {
+      "kicker": "Regional commitment",
+      "titleAccent": "European",
+      "titleRest": "sovereignty",
+      "tagline": "Infrastructure and data practices aligned with EU residency, policy, and digital autonomy expectations."
+    },
     "pricing": {
       "title": "Subscription & funding",
       "subtitle": "Free for individuals. Optional subscription for extended features, privacy-friendly funding via donations and works council benefits.",
