@@ -157,7 +157,7 @@ Use smooth animations for sliding between the steps etc !
 
 - [ ] Add a Shared Secret Visual Method like https://github.com/teapot-labs/identeapots
 
-- [ ] Add a blog post explaining the role of the "Security Signature" Shared Secret Visual and where the passkeys comes in clutch to verify domain name. Open source -> More prone to be cloned and phising tries. Still a security for email to prevent fishing. Version for dev : "deterministic visual anti-phishing identifier" - accessible via une API avec un hash du user id
+- [x] Add a blog post explaining the role of the "Security Signature" Shared Secret Visual and where the passkeys comes in clutch to verify domain name. Open source -> More prone to be cloned and phising tries. Still a security for email to prevent fishing. Version for dev : "deterministic visual anti-phishing identifier" - accessible via une API avec un hash du user id
 
 - [ ] Add `janus_signature_hash` keycloak custom attribute field. Use server app to compute with `HMAC(user_id, server_secret)` and update it with the Keycalok API between `Conditions of use etc Acceptation` and `TOTP` register flow steps
 
