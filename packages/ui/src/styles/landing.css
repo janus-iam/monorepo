@@ -202,6 +202,38 @@ pre code {
   color: inherit;
 }
 
+/* Article MDX/HTML: semantic colors (replaces prose-slate), works with theme tokens */
+.prose.prose-landing {
+  --tw-prose-body: var(--sea-ink-soft);
+  --tw-prose-headings: var(--sea-ink);
+  --tw-prose-lead: var(--sea-ink-soft);
+  --tw-prose-links: var(--lagoon-deep);
+  --tw-prose-bold: var(--sea-ink);
+  --tw-prose-counters: var(--kicker);
+  --tw-prose-bullets: var(--lagoon);
+  --tw-prose-hr: var(--line);
+  --tw-prose-quotes: var(--sea-ink-soft);
+  --tw-prose-quote-borders: var(--lagoon);
+  --tw-prose-captions: var(--kicker);
+  --tw-prose-kbd: var(--sea-ink);
+  --tw-prose-kbd-shadows: color-mix(in oklab, var(--sea-ink) 14%, transparent);
+  --tw-prose-code: var(--sea-ink);
+  --tw-prose-pre-code: #e8efff;
+  --tw-prose-pre-bg: #1a2740;
+  --tw-prose-th-borders: var(--line);
+  --tw-prose-td-borders: var(--line);
+}
+
+.prose.prose-landing :where(h2, h3) {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.prose.prose-landing :where(a):hover {
+  color: var(--sea-ink);
+}
+
 .prose pre {
   border: 1px solid var(--line);
   border-radius: 12px;

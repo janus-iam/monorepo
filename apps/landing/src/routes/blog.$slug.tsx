@@ -1,9 +1,10 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { MDXContent } from "@content-collections/mdx/react";
 import { allBlogs } from "content-collections";
-import { SITE_URL } from "@/lib/site";
+import { LandingArticleDocument } from "@/components/LandingArticleDocument";
 import { MdxCallout } from "@/components/MdxCallout";
 import { MdxMetrics } from "@/components/MdxMetrics";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/blog/$slug")({
     return post;
   },
   head: ({ loaderData, params }) => {
-    const title = loaderData?.title ?? "Post";
+    const title = loaderData?.title ?? "Blog";
     const description = loaderData?.description ?? "";
     const image = loaderData?.heroImage ?? "/images/lagoon-1.svg";
     return {
@@ -40,26 +41,17 @@ function BlogPost() {
   const post = Route.useLoaderData();
 
   return (
-    <main className="page-wrap px-4 pb-12 pt-16">
-      <article className="island-shell rounded-2xl p-6 sm:p-8">
-        {post.heroImage ? (
-          <img src={post.heroImage} alt="" className="mb-6 h-64 w-full rounded-2xl object-cover" />
-        ) : null}
-        <p className="island-kicker mb-2">Post</p>
-        <h1 className="display-title mb-3 text-4xl font-bold text-[var(--sea-ink)] sm:text-5xl">
-          {post.title}
-        </h1>
-        <p className="mb-6 text-sm text-[var(--sea-ink-soft)]">
-          {new Date(post.pubDate).toLocaleDateString()}
-        </p>
-        <div className="prose prose-slate prose-headings:text-[var(--sea-ink)] prose-p:text-[var(--sea-ink-soft)] prose-li:text-[var(--sea-ink-soft)] prose-ul:text-[var(--sea-ink-soft)] prose-ol:text-[var(--sea-ink-soft)] prose-strong:text-[var(--sea-ink)] prose-a:text-[var(--lagoon-deep)] max-w-none">
-          {post.mdx ? (
-            <MDXContent code={post.mdx} components={{ MdxCallout, MdxMetrics }} />
-          ) : (
-            <div dangerouslySetInnerHTML={{ __html: post.html ?? "" }} />
-          )}
-        </div>
-      </article>
-    </main>
+    <LandingArticleDocument
+      kicker="Blog"
+      title={post.title}
+      pubDate={post.pubDate}
+      heroImage={post.heroImage}
+    >
+      {post.mdx ? (
+        <MDXContent code={post.mdx} components={{ MdxCallout, MdxMetrics }} />
+      ) : (
+        <div dangerouslySetInnerHTML={{ __html: post.html ?? "" }} />
+      )}
+    </LandingArticleDocument>
   );
 }

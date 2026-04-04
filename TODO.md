@@ -1,4 +1,4 @@
-- [ ] Create a page called `what-do-you-need` with two CTA buttons, one is `Sign In` and the other is `Register`; this will be a gateway to either the register flow or login with keycloak itself. After Sign in, redirect to `/dashboard`
+- [x] Create the default web app page with two CTA buttons, one is `Sign In` and the other is `Register`; this will be a gateway to either the register flow or login with keycloak itself. After Sign in, redirect to `/dashboard`
 
 - [x] Put the same fonts in web and landing
 
@@ -100,7 +100,7 @@ Use smooth animations for sliding between the steps etc !
 
 - [ ] Add a blog post for all the MFA methods
 
-- [ ] Improve the theme and make it the same for apps/landing/src/routes/blog.$slug.tsx and apps/landing/src/routes/governance.$slug.tsx
+- [x] Improve the theme and make it the same for apps/landing/src/routes/blog.$slug.tsx and apps/landing/src/routes/governance.$slug.tsx
 
 - [ ] Create a dashboard like https://github.com/keycloak/keycloak/tree/main/js/apps/account-ui with all pages for the user to manage they account using https://github.com/keycloak/keycloak/tree/main/js/libs/keycloak-admin-client following [transform.md](./transform.md)
 
