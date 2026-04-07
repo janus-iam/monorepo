@@ -26,7 +26,7 @@ export function Map() {
 
   return (
     <section className="space-y-3">
-      <div className="relative h-[min(520px,72vh)] w-full overflow-hidden rounded-2xl border border-(--line) bg-(--surface) shadow-[0_22px_44px_rgba(30,90,72,0.08),0_6px_18px_rgba(23,58,64,0.06)]">
+      <div className="island-shell relative h-[min(520px,72vh)] w-full overflow-hidden rounded-2xl">
         <div className="absolute inset-0 z-0">
           <div className="to-background absolute inset-0 bg-radial from-transparent to-200%" />
           <DottedMap<MyMarker>
