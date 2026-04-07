@@ -11,7 +11,9 @@ function RootComponent() {
   return (
     <>
       <Header />
-      <Outlet />
+      <div className="border-x border-dashed page-wrap">
+        <Outlet />
+      </div>
       <Footer />
     </>
   );
