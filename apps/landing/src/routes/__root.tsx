@@ -11,7 +11,7 @@ function RootComponent() {
   return (
     <>
       <Header />
-      <div className="border-x border-dashed page-wrap">
+      <div className="border-x border-dashed border-(--line) page-wrap">
         <Outlet />
       </div>
       <Footer />
