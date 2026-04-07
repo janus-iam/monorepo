@@ -269,6 +269,15 @@ pre code {
     0 22px 44px rgba(30, 90, 72, 0.1),
     0 6px 18px rgba(23, 58, 64, 0.08);
   backdrop-filter: blur(4px);
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.island-shell:hover {
+  border-color: var(--lagoon);
+  box-shadow:
+    0 1px 0 var(--inset-glint) inset,
+    0 28px 56px rgba(30, 90, 72, 0.12),
+    0 8px 24px rgba(23, 58, 64, 0.1);
 }
 
 .feature-card {
@@ -281,11 +290,21 @@ pre code {
     0 1px 0 var(--inset-glint) inset,
     0 18px 34px rgba(30, 90, 72, 0.1),
     0 4px 14px rgba(23, 58, 64, 0.06);
+  transition: all 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .feature-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   border-color: var(--lagoon);
+  box-shadow:
+    0 1px 0 var(--inset-glint) inset,
+    0 24px 48px rgba(30, 90, 72, 0.12),
+    0 6px 20px rgba(23, 58, 64, 0.08);
+}
+
+.feature-card:focus-within {
+  outline: 2px solid var(--lagoon);
+  outline-offset: 2px;
 }
 
 button,
@@ -298,6 +317,16 @@ a {
     transform 180ms ease;
 }
 
+button:focus-visible {
+  outline: 2px solid var(--sea-ink);
+  outline-offset: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--lagoon);
+  outline-offset: 4px;
+}
+
 .island-kicker {
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -306,12 +335,44 @@ a {
   color: var(--kicker);
 }
 
+/* Improved step number styling */
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--lagoon) 20%, transparent),
+    var(--surface)
+  );
+  border: 1px solid var(--line);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--sea-ink);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Enhanced text selection styling */
+::selection {
+  background: var(--sea-ink);
+  color: var(--sand);
+}
+
+:root[data-theme="dark"] ::selection {
+  background: var(--sand);
+  color: var(--sea-ink);
+}
+
 .nav-link {
   position: relative;
   display: inline-flex;
   align-items: center;
   text-decoration: none;
   color: var(--sea-ink-soft);
+  transition: color 200ms ease;
 }
 
 .nav-link::after {
@@ -324,7 +385,7 @@ a {
   transform: scaleX(0);
   transform-origin: left;
   background: var(--lagoon-deep);
-  transition: transform 170ms ease;
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-link:hover,
@@ -335,6 +396,11 @@ a {
 .nav-link:hover::after,
 .nav-link.is-active::after {
   transform: scaleX(1);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--lagoon);
+  outline-offset: 4px;
 }
 
 @media (max-width: 640px) {
@@ -373,6 +439,47 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

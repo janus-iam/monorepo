@@ -36,18 +36,18 @@ export function TotpApps() {
 
   return (
     <section className="island-shell rounded-2xl p-6 sm:p-8 lg:p-10">
-      <h2 className="display-title mb-2 text-2xl font-bold text-[var(--sea-ink)] sm:text-3xl">
+      <h2 className="display-title mb-2 text-2xl font-bold text-(--sea-ink) sm:text-3xl">
         {t("sections.totp.title")}
       </h2>
-      <p className="mb-8 text-sm text-[var(--sea-ink-soft)]">{t("sections.totp.subtitle")}</p>
+      <p className="mb-8 text-sm text-(--sea-ink-soft)">{t("sections.totp.subtitle")}</p>
       <div className="grid gap-8 sm:grid-cols-2">
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--kicker)]">
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-(--kicker)">
             {t("sections.totp.android")}
           </h3>
           <ul className="m-0 space-y-3">
             {ANDROID_APPS.map((app, i) => (
-              <li key={i} className="text-sm text-[var(--sea-ink)]">
+              <li key={i} className="text-sm text-(--sea-ink)">
                 {t(app.nameKey)}
                 <span className="ml-2 inline-flex flex-wrap gap-2">
                   {app.playStore && (
@@ -55,7 +55,7 @@ export function TotpApps() {
                       href={app.playStore}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[var(--lagoon-deep)] underline"
+                      className="text-(--lagoon-deep) underline"
                     >
                       {t("sections.totp.playStore")}
                     </a>
@@ -65,7 +65,7 @@ export function TotpApps() {
                       href={app.fdroid}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[var(--lagoon-deep)] underline"
+                      className="text-(--lagoon-deep) underline"
                     >
                       {t("sections.totp.fdroid")}
                     </a>
@@ -76,12 +76,12 @@ export function TotpApps() {
           </ul>
         </div>
         <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--kicker)]">
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-(--kicker)">
             {t("sections.totp.ios")}
           </h3>
           <ul className="m-0 space-y-3">
             {IOS_APPS.map((app, i) => (
-              <li key={i} className="text-sm text-[var(--sea-ink)]">
+              <li key={i} className="text-sm text-(--sea-ink)">
                 {t(app.nameKey)}
                 {app.appStore && (
                   <span className="ml-2">
@@ -89,7 +89,7 @@ export function TotpApps() {
                       href={app.appStore}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[var(--lagoon-deep)] underline"
+                      className="text-(--lagoon-deep) underline"
                     >
                       {t("sections.totp.appStore")}
                     </a>

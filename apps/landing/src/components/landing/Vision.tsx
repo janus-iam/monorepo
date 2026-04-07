@@ -12,10 +12,10 @@ export function Vision() {
 
   return (
     <section className="island-shell rounded-2xl p-6 sm:p-8 lg:p-10">
-      <h2 className="display-title mb-6 text-2xl font-bold text-[var(--sea-ink)] sm:text-3xl">
+      <h2 className="display-title mb-6 text-2xl font-bold text-(--sea-ink)ext-3xl">
         {t("sections.vision.title")}
       </h2>
-      <p className="mb-6 text-sm text-[var(--sea-ink-soft)] sm:text-base">
+      <p className="mb-8 text-sm leading-relaxed text-(--sea-ink-soft) sm:text-base">
         {t("sections.vision.subtitle")}
       </p>
       <div className="grid gap-8 lg:grid-cols-2">
@@ -25,12 +25,18 @@ export function Vision() {
 
           return (
             <div key={key}>
-              <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--kicker)]">
+              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-(--kicker)">
                 {label}
               </h3>
-              <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[var(--sea-ink-soft)] sm:text-base">
+              <ul className="space-y-2.5">
                 {goals.map((item, index) => (
-                  <li key={index}>{item}</li>
+                  <li
+                    key={index}
+                    className="flex items-start gap-3 text-sm text-(--sea-ink-soft) sm:text-base"
+                  >
+                    <span className="shrink-0 text-(--lagoon)">•</span>
+                    <span>{item}</span>
+                  </li>
                 ))}
               </ul>
             </div>

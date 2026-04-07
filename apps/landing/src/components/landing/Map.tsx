@@ -26,11 +26,11 @@ export function Map() {
 
   return (
     <section className="space-y-3">
-      <div className="relative h-[min(520px,72vh)] w-full overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] shadow-[0_22px_44px_rgba(30,90,72,0.08),0_6px_18px_rgba(23,58,64,0.06)]">
+      <div className="relative h-[min(520px,72vh)] w-full overflow-hidden rounded-2xl border border-(--line) bg-(--surface) shadow-[0_22px_44px_rgba(30,90,72,0.08),0_6px_18px_rgba(23,58,64,0.06)]">
         <div className="absolute inset-0 z-0">
           <div className="to-background absolute inset-0 bg-radial from-transparent to-200%" />
           <DottedMap<MyMarker>
-            className="text-[var(--lagoon)]"
+            className="text-(--lagoon)"
             markerColor="var(--lagoon-deep)"
             markers={markers}
             renderMarkerOverlay={({ marker, x, y, r, index }) => {
@@ -85,7 +85,7 @@ export function Map() {
         </div>
 
         <div
-          className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[var(--surface-strong)] via-[var(--surface-strong)]/55 to-transparent"
+          className="pointer-events-none absolute inset-0 z-10 bg-linear-to-t from-(--surface-strong) via-(--surface-strong)/55 to-transparent"
           aria-hidden
         />
 
@@ -93,14 +93,12 @@ export function Map() {
           <div className="ml-auto max-w-[min(100%,22rem)] text-right">
             <p className="island-kicker mb-2">{t("sections.map.kicker")}</p>
             <h2 className="display-title text-3xl font-bold leading-[1.06] tracking-tight sm:text-4xl md:text-[2.75rem]">
-              <span className="block bg-gradient-to-br from-[var(--sea-ink)] via-[var(--palm)] to-[var(--lagoon-deep)] bg-clip-text text-transparent">
+              <span className="block bg-linear-to-br from-(--sea-ink) via-(--palm) to-(--lagoon-deep) bg-clip-text text-transparent">
                 {t("sections.map.titleAccent")}
               </span>
-              <span className="mt-0.5 block text-[var(--sea-ink)]">
-                {t("sections.map.titleRest")}
-              </span>
+              <span className="mt-0.5 block text-(--sea-ink)">{t("sections.map.titleRest")}</span>
             </h2>
-            <p className="mt-3 text-xs font-medium leading-relaxed text-[var(--sea-ink-soft)] sm:text-sm">
+            <p className="mt-3 text-xs font-medium leading-relaxed text-(--sea-ink-soft) sm:text-sm">
               {t("sections.map.tagline")}
             </p>
           </div>

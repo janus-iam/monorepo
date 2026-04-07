@@ -26,12 +26,12 @@ export function LandingArticleDocument({
           />
         ) : null}
         <p className="island-kicker mb-2">{kicker}</p>
-        <h1 className="display-title mb-3 text-4xl font-bold tracking-tight text-[var(--sea-ink)] sm:text-5xl">
+        <h1 className="display-title mb-3 text-4xl font-bold tracking-tight text-(--sea-ink) sm:text-5xl">
           {title}
         </h1>
         <time
           dateTime={pubDate}
-          className="mb-8 block text-sm tabular-nums tracking-tight text-[var(--sea-ink-soft)]"
+          className="mb-8 block text-sm tabular-nums tracking-tight text-(--sea-ink-soft)"
         >
           {new Date(pubDate).toLocaleDateString(undefined, {
             year: "numeric",

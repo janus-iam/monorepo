@@ -15,25 +15,15 @@ export default function Header() {
   const { t } = useTranslation();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--header-bg)] px-4 backdrop-blur-lg">
-      <nav className="page-wrap flex flex-wrap items-center gap-x-3 gap-y-2 py-3 sm:py-4">
-        <h2 className="m-0 flex-shrink-0 text-base font-semibold tracking-tight">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--chip-line)] bg-[var(--chip-bg)] px-3 py-1.5 text-sm text-[var(--sea-ink)] no-underline shadow-sm sm:px-4 sm:py-2"
-          >
-            <span className="h-2 w-2 rounded-full bg-[var(--sea-ink)]" />
-            Janus
-          </Link>
-        </h2>
-
-        <div className="order-3 flex w-full flex-wrap items-center gap-x-4 gap-y-1 pb-1 text-sm font-semibold sm:order-2 sm:w-auto sm:flex-nowrap sm:pb-0">
+    <header className="sticky top-0 z-50 border-b border-(--line) bg-(--header-bg) px-4 backdrop-blur-lg">
+      <nav className="page-wrap flex flex-wrap justify-between items-center gap-x-3 gap-y-2 py-3 sm:py-4">
+        <div className="flex w-full flex-wrap items-center gap-x-4 gap-y-1 pb-1 text-sm font-semibold sm:w-auto sm:flex-nowrap sm:pb-0">
           <Link to="/" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
             {t("nav.home")}
           </Link>
-          <a href="/#pricing" className="nav-link">
+          <Link to="/" hash="pricing" className="nav-link">
             {t("nav.pricing")}
-          </a>
+          </Link>
           <Link to="/blog" className="nav-link" activeProps={{ className: "nav-link is-active" }}>
             {t("nav.blog")}
           </Link>
@@ -46,17 +36,26 @@ export default function Header() {
           </Link>
         </div>
 
+        <h2 className="m-0 shrink-0 text-base font-semibold tracking-tight">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 rounded-full border border-(--chip-line) bg-(--chip-bg) px-3 py-1.5 text-sm text-(--sea-ink) no-underline shadow-sm sm:px-4 sm:py-2"
+          >
+            <span className="h-2 w-2 rounded-full bg-(--sea-ink)" />
+            Janus
+          </Link>
+        </h2>
+
         <div className="ml-auto flex items-center gap-1.5 sm:ml-0 sm:gap-2">
           <a
             href="https://github.com/janus-iam"
             target="_blank"
             rel="noreferrer"
-            className="hidden rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)] sm:block"
+            className="hidden rounded-xl p-2 text-(--sea-ink-soft) transition hover:bg-(--link-bg-hover) hover:text-(--sea-ink) sm:block"
             aria-label={t("social.github")}
           >
             {GITHUB_SVG}
           </a>
-
           <ThemeToggle />
         </div>
       </nav>
