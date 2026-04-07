@@ -42,7 +42,7 @@ export function Pricing() {
               </li>
             ))}
           </ul>
-          <p className="mb-6 rounded-lg border border-dashed border-(--line) bg-(--surface-strong) px-4 py-3 text-sm text-(--sea-ink-soft)">
+          <p className="mb-6 rounded-lg border border-dashed border-(--line) border-(--line) bg-(--surface-strong) px-4 py-3 text-sm text-(--sea-ink-soft)">
             {t("sections.pricing.stickerNote")}
           </p>
           <a

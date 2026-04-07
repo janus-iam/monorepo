@@ -25,7 +25,7 @@ export function Vision() {
 
           return (
             <div key={key}>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-(--kicker)">
+              <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-(--kicker)">
                 {label}
               </h3>
               <ul className="space-y-2.5">
