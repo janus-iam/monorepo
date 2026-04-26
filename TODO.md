@@ -187,4 +187,5 @@ Use smooth animations for sliding between the steps etc !
 - [ ] Add skeletons for dashboards
 
 - [ ] Package Janus web, server and ingestion into a helm chart for easy deployment
+
 - [ ] Extend the dashboard to all possible realms
