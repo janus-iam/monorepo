@@ -1,6 +1,7 @@
 export { Hero } from "./Hero";
 export { DataPrivacy } from "./DataPrivacy";
 export { AuthFlow } from "./AuthFlow";
+export { UseCases } from "./UseCases";
 export { MfaMethods } from "./MfaMethods";
 export { Services } from "./Services";
 export { Vision } from "./Vision";

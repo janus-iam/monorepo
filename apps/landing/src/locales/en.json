@@ -8,21 +8,21 @@
     "demo": "Demo"
   },
   "hero": {
-    "kicker": "Open Identity Platform",
-    "title": "One identity. Everywhere.",
-    "subtitle": "Centralized IAM for the open web. Neutral identity provider with MFA, monitoring, and strong privacy guarantees, designed for SOC 2 and GDPR-grade resilience across multi-cloud, multi-region infrastructure.",
+    "kicker": "Open Identity for Homelabs and NGOs",
+    "title": "Secure identity for every self-hosted service.",
+    "subtitle": "Janus is the authentication layer for homelab operators and mission-driven NGOs. Centralize sign-in, enforce MFA, and keep control of your users and data without vendor lock-in.",
     "ctaPrimary": "Get started",
     "ctaSecondary": "See pricing",
     "stat": "Managed Identity & Access · Multi-cloud · Multi-region"
   },
   "sections": {
     "data": {
-      "title": "What we keep. Where it lives. Who has access.",
+      "title": "Built for trusted access in community infrastructure.",
       "whatWeKeep": "What we keep",
       "whatWeKeepList": [
-        "Identity (email, profile you choose)",
-        "Authentication logs (security only)",
-        "Consent records"
+        "Only the identity fields you choose to collect (email, profile, role)",
+        "Authentication logs for security and audit trails",
+        "Consent and access records for accountability"
       ],
       "whereStored": "Where it's stored",
       "whereStoredList": [
@@ -32,8 +32,8 @@
       "whoHasAccess": "Who has access",
       "whoHasAccessList": [
         "You: full access to your data",
-        "Support: only when you request help",
-        "No resale, no ad targeting"
+        "Janus support: only when explicitly requested",
+        "No resale, no ad targeting, no surveillance business model"
       ]
     },
     "auth": {
@@ -43,6 +43,36 @@
       "step2": "You consent once at Janus",
       "step3": "Callback, session created",
       "points": ["No tracking for ads", "Minimal data only", "You control revocation"]
+    },
+    "useCases": {
+      "title": "Use cases: homelab and NGO teams",
+      "subtitle": "Janus lets your developers delegate authentication and focus on product delivery while we handle the difficult identity infrastructure work.",
+      "cards": [
+        {
+          "title": "Homelab operators",
+          "description": "Run a single trusted login across your self-hosted tools without rebuilding auth for every service.",
+          "points": [
+            "Centralized sign-in for dashboards, apps, and admin tools",
+            "MFA and account protection without custom security plumbing",
+            "Storage and identity lifecycle handled with a clean integration path"
+          ]
+        },
+        {
+          "title": "NGOs and mission-driven organizations",
+          "description": "Protect volunteers, staff, and partner access while keeping operational overhead low.",
+          "points": [
+            "Role-ready identity foundation for team and partner access",
+            "Audit-friendly authentication logs and consent records",
+            "Privacy-first defaults that support responsible data stewardship"
+          ]
+        }
+      ],
+      "promiseTitle": "Janus handles the hard part",
+      "promisePoints": [
+        "Secure storage strategy, token/session handling, and encryption practices",
+        "Authentication security controls, MFA flows, and ongoing hardening",
+        "A developer-friendly interface so apps can simply delegate authentication to Janus"
+      ]
     },
     "mfaMethods": {
       "title": "MFA methods",
@@ -145,9 +175,9 @@
     },
     "pricing": {
       "title": "Subscription & funding",
-      "subtitle": "Free for individuals. Optional subscription for extended features, privacy-friendly funding via donations and works council benefits.",
+      "subtitle": "Free for individuals and small homelabs. Optional paid plans help NGOs and teams scale securely while funding sustainable development.",
       "free": "Free",
-      "freeFor": "For individuals",
+      "freeFor": "For individuals, makers, and homelabs",
       "freeFeatures": [
         "Sign in with Janus",
         "MFA on your Janus account",
@@ -157,7 +187,7 @@
         "Use your identity with out-of-the-box alternative apps (Drive, Photos, etc.) as they launch"
       ],
       "paid": "Subscription",
-      "paidFor": "For people and organizations who want to fund Janus and unlock more services",
+      "paidFor": "For NGOs and organizations that need advanced controls and want to fund Janus",
       "paidFeatures": [
         "Fund Janus through a privacy-respecting subscription",
         "Subscription purchasable via works council benefits where available",
