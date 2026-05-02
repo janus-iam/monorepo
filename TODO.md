@@ -138,7 +138,7 @@ Use smooth animations for sliding between the steps etc !
   - [ ] https://ui.aceternity.com/components/gooey-input ?
   - [ ] https://www.chamaac.com/components/sections/how-it-works to explain register flow
 
-- Explore MapCN & https://ui.tripled.work
+- [ ] Explore MapCN & https://ui.tripled.work
 
 - [ ] Create a trpc public procedure for landing page analytics which forward to NATS
 
@@ -152,8 +152,8 @@ Use smooth animations for sliding between the steps etc !
 
 - [x] Add to web app https://www.cult-ui.com/docs/components/family-button to switch color mode
 
-- [ ] Create a Keycloak extension to implement TOTP lifecycle management admin API endpoints
-      Take inspiration on https://github.com/arisusantolie/keycloak-totp-api-provider and https://deepwiki.com/search/can-i-create-a-java-extension_d6f847f8-6b97-4b5a-b32a-1c56b5986200?mode=fast
+- [x] Create a Keycloak extension to implement TOTP lifecycle management admin API endpoints
+      Take inspiration on https://github.com/arisusantolie/keycloak-totp-api-provider and https://deepwiki.com/search/can-i-create-a-java-extension_d6f847f8-6b97-4b5a-b32a-1c56b5986200?mode=fast -> in progress [here](https://github.com/janus-iam/keycloak-totp-admin-api)
 
 - [ ] Add a Shared Secret Visual Method like https://github.com/teapot-labs/identeapots
 
@@ -189,3 +189,24 @@ Use smooth animations for sliding between the steps etc !
 - [ ] Package Janus web, server and ingestion into a helm chart for easy deployment
 
 - [ ] Extend the dashboard to all possible realms
+
+- [ ] Add a dynamic entropy password calculator
+      with something like :
+
+```py
+def get_charset_size(password):
+    size = 0
+    if re.search(r'[a-z]', password): size += 26
+    if re.search(r'[A-Z]', password): size += 26
+    if re.search(r'[0-9]', password): size += 10
+    if re.search(r'[!@#$%^&*()_+\-=\[\]{};\':\"\\|,.<>\/?`~]', password): size += 32
+    return size
+
+
+def calculate_entropy(password):
+    charset_size = get_charset_size(password)
+    if charset_size == 0:
+        return 0
+    entropy = math.log2(charset_size) * len(password)
+    return round(entropy, 2)
+```
